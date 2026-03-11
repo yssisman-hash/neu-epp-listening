@@ -1,0 +1,2104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>NEU EPP – Listening Practices</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --navy: #0a1628;
+  --deep: #0d1f3c;
+  --mid: #1a3358;
+  --accent: #c8922a;
+  --gold: #e8b84b;
+  --cream: #f5f0e8;
+  --text: #e8e4dc;
+  --muted: #8fa3bc;
+  --correct: #4caf50;
+  --wrong: #e53935;
+  --card: rgba(255,255,255,0.04);
+  --border: rgba(200,146,42,0.25);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy);
+  color: var(--text);
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-weight: 300;
+  line-height: 1.75;
+  min-height: 100vh;
+}
+
+/* ── HEADER ── */
+.site-header {
+  background: linear-gradient(160deg, var(--deep) 0%, #0b1a30 60%, #091525 100%);
+  border-bottom: 2px solid var(--border);
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 40px rgba(0,0,0,0.5);
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.uni-logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--gold));
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--navy);
+  flex-shrink: 0;
+  box-shadow: 0 0 0 3px rgba(200,146,42,0.3);
+}
+
+.header-text { flex: 1; }
+
+.header-text .subtitle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.header-text h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(14px, 2vw, 20px);
+  font-weight: 700;
+  color: var(--cream);
+  line-height: 1.25;
+}
+
+.header-badge {
+  background: rgba(200,146,42,0.15);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ── HERO STRIP ── */
+.hero-strip {
+  background: linear-gradient(90deg, rgba(200,146,42,0.08) 0%, transparent 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 28px 32px;
+  text-align: center;
+}
+.hero-strip p {
+  font-size: 13px;
+  color: var(--muted);
+  max-width: 700px;
+  margin: 0 auto;
+  letter-spacing: 0.3px;
+}
+.hero-strip p strong { color: var(--gold); font-weight: 600; }
+
+/* ── MAIN CONTAINER ── */
+.main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+/* ── EXERCISE CARD ── */
+.exercise {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  margin-bottom: 32px;
+  overflow: hidden;
+  transition: box-shadow 0.3s;
+}
+.exercise:hover { box-shadow: 0 8px 40px rgba(200,146,42,0.1); }
+
+.exercise-header {
+  background: linear-gradient(90deg, rgba(200,146,42,0.12) 0%, rgba(255,255,255,0.02) 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 22px 28px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  user-select: none;
+  transition: background 0.2s;
+}
+.exercise-header:hover { background: linear-gradient(90deg, rgba(200,146,42,0.18) 0%, rgba(255,255,255,0.04) 100%); }
+
+.ex-number {
+  width: 40px; height: 40px;
+  background: linear-gradient(135deg, var(--accent), var(--gold));
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--navy);
+  flex-shrink: 0;
+}
+
+.ex-meta { flex: 1; }
+.ex-level {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 3px;
+}
+.ex-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--cream);
+}
+
+.ex-chevron {
+  color: var(--accent);
+  font-size: 20px;
+  transition: transform 0.3s;
+  flex-shrink: 0;
+}
+.exercise.open .ex-chevron { transform: rotate(180deg); }
+
+.exercise-body {
+  display: none;
+  padding: 0;
+}
+.exercise.open .exercise-body { display: block; }
+
+/* ── TABS ── */
+.tabs-nav {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  padding: 0 28px;
+  overflow-x: auto;
+  gap: 0;
+  background: rgba(0,0,0,0.2);
+}
+.tab-btn {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 14px 18px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.tab-btn:hover { color: var(--gold); }
+.tab-btn.active {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+
+.tab-content { display: none; padding: 28px; }
+.tab-content.active { display: block; }
+
+/* ── TEXT SECTION ── */
+.article-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(200,146,42,0.15);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 18px;
+  color: var(--gold);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin-bottom: 20px;
+  transition: all 0.2s;
+}
+.article-link-btn:hover {
+  background: rgba(200,146,42,0.25);
+  border-color: var(--gold);
+  color: var(--cream);
+}
+
+.article-text {
+  background: rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  padding: 24px;
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--text);
+}
+.article-text p { margin-bottom: 12px; }
+.article-text p:last-child { margin-bottom: 0; }
+
+/* ── AUDIO PLAYER ── */
+.audio-section {
+  margin-top: 20px;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.audio-icon { font-size: 28px; flex-shrink: 0; }
+.audio-info { flex: 1; }
+.audio-info p { font-size: 12px; color: var(--muted); margin-bottom: 6px; font-family: 'JetBrains Mono', monospace; letter-spacing: 1px; }
+.audio-info audio { width: 100%; accent-color: var(--gold); }
+.soundcloud-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--gold);
+  text-decoration: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 1px;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.soundcloud-link:hover { background: rgba(200,146,42,0.15); border-color: var(--gold); }
+
+/* ── QUESTIONS ── */
+.questions-section h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.questions-section h3 .q-icon { font-size: 18px; }
+
+.question-block {
+  background: rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 16px;
+  transition: border-color 0.2s;
+}
+.question-block.correct { border-color: var(--correct) !important; }
+.question-block.wrong { border-color: var(--wrong) !important; }
+
+.question-block .q-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.question-block .q-text {
+  font-size: 14px;
+  color: var(--cream);
+  margin-bottom: 14px;
+  font-weight: 400;
+}
+
+.options { display: flex; flex-direction: column; gap: 8px; }
+.option-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text);
+  transition: all 0.15s;
+}
+.option-label:hover { border-color: var(--accent); background: rgba(200,146,42,0.05); }
+.option-label input[type="radio"] { accent-color: var(--gold); flex-shrink: 0; }
+.option-label.selected-correct { background: rgba(76,175,80,0.12); border-color: var(--correct); color: #a5d6a7; }
+.option-label.selected-wrong { background: rgba(229,57,53,0.12); border-color: var(--wrong); color: #ef9a9a; }
+.option-label.reveal-correct { background: rgba(76,175,80,0.08); border-color: rgba(76,175,80,0.4); color: #a5d6a7; }
+
+/* fill blank */
+.fill-input {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  padding: 8px 14px;
+  color: var(--cream);
+  font-family: 'Source Serif 4', serif;
+  font-size: 14px;
+  width: 100%;
+  margin-top: 8px;
+  transition: border-color 0.2s;
+}
+.fill-input:focus { outline: none; border-color: var(--accent); }
+.fill-input.correct-input { border-color: var(--correct); background: rgba(76,175,80,0.08); }
+.fill-input.wrong-input { border-color: var(--wrong); background: rgba(229,57,53,0.08); }
+
+/* vocab match */
+.vocab-options { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+.vocab-option {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text);
+  transition: all 0.15s;
+}
+.vocab-option:hover { border-color: var(--accent); background: rgba(200,146,42,0.05); }
+.vocab-option input[type="radio"] { accent-color: var(--gold); }
+.vocab-option.selected-correct { background: rgba(76,175,80,0.12); border-color: var(--correct); color: #a5d6a7; }
+.vocab-option.selected-wrong { background: rgba(229,57,53,0.12); border-color: var(--wrong); color: #ef9a9a; }
+.vocab-option.reveal-correct { background: rgba(76,175,80,0.08); border-color: rgba(76,175,80,0.4); color: #a5d6a7; }
+
+/* feedback */
+.feedback {
+  display: none;
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+.feedback.correct { display: flex; align-items: flex-start; gap: 8px; background: rgba(76,175,80,0.1); border: 1px solid rgba(76,175,80,0.3); color: #a5d6a7; }
+.feedback.wrong { display: flex; align-items: flex-start; gap: 8px; background: rgba(229,57,53,0.1); border: 1px solid rgba(229,57,53,0.3); color: #ef9a9a; }
+.feedback strong { color: inherit; }
+
+/* paragraph writing */
+.writing-prompt {
+  background: rgba(200,146,42,0.06);
+  border: 1px dashed rgba(200,146,42,0.3);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: var(--cream);
+  line-height: 1.7;
+}
+.writing-area {
+  width: 100%;
+  min-height: 140px;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 14px;
+  color: var(--cream);
+  font-family: 'Source Serif 4', serif;
+  font-size: 14px;
+  line-height: 1.7;
+  resize: vertical;
+  transition: border-color 0.2s;
+}
+.writing-area:focus { outline: none; border-color: var(--accent); }
+.word-count { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); margin-top: 6px; }
+
+/* check button */
+.check-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--accent), #b8821a);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  color: var(--navy);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.2s;
+  box-shadow: 0 4px 16px rgba(200,146,42,0.3);
+}
+.check-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(200,146,42,0.4); }
+.check-btn:active { transform: translateY(0); }
+
+.score-display {
+  display: none;
+  margin-top: 16px;
+  padding: 14px 18px;
+  background: rgba(200,146,42,0.1);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--gold);
+  letter-spacing: 1px;
+}
+
+/* ── GLOSSARY ── */
+.glossary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+}
+.gloss-card {
+  background: rgba(0,0,0,0.25);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.gloss-card:hover { transform: translateY(-2px); border-color: var(--gold); }
+.gloss-word {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.gloss-pos {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.gloss-meaning {
+  font-size: 13px;
+  color: var(--text);
+  padding-top: 8px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex; align-items: flex-start; gap: 6px;
+}
+.gloss-meaning .tr-flag { font-size: 15px; }
+.gloss-en { font-size: 12px; color: var(--muted); margin-top: 4px; font-style: italic; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--deep);
+  border-top: 1px solid var(--border);
+  padding: 28px 32px;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+footer span { color: var(--accent); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .header-inner { flex-wrap: wrap; }
+  .header-badge { display: none; }
+  .tabs-nav { padding: 0 12px; }
+  .tab-content { padding: 16px; }
+  .exercise-header { padding: 16px; }
+  .main { padding: 24px 12px 60px; }
+}
+
+/* ── AI WRITING CHECKER ── */
+.writing-check-btn {
+  background: linear-gradient(135deg, #1a6b6b, #0d4f4f);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+.writing-check-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(26,107,107,0.4); }
+.writing-check-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.writing-check-btn .spinner {
+  width: 14px; height: 14px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: none;
+}
+.writing-check-btn.loading .spinner { display: block; }
+.writing-check-btn.loading .btn-text { display: none; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.ai-feedback-box {
+  display: none;
+  margin-top: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(200,146,42,0.3);
+  background: rgba(0,0,0,0.25);
+}
+.ai-feedback-box.visible { display: block; }
+.ai-fb-header {
+  background: linear-gradient(90deg, rgba(200,146,42,0.2), transparent);
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid rgba(200,146,42,0.15);
+}
+.ai-fb-header .ai-icon { font-size: 18px; }
+.ai-fb-header .ai-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.ai-fb-body { padding: 18px 20px; font-size: 14px; line-height: 1.8; color: var(--text); }
+.ai-fb-body .corrected-text {
+  background: rgba(255,255,255,0.05);
+  border-left: 3px solid var(--gold);
+  padding: 12px 16px;
+  border-radius: 0 8px 8px 0;
+  margin: 12px 0;
+  font-style: italic;
+  line-height: 1.9;
+}
+.ai-fb-body .error-mark { color: #ff6b6b; text-decoration: line-through; }
+.ai-fb-body .correction { color: #69db7c; font-weight: 600; }
+.ai-fb-body .fb-section { margin-top: 14px; }
+.ai-fb-body .fb-section-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.ai-fb-body ul { padding-left: 18px; }
+.ai-fb-body li { margin-bottom: 5px; }
+.score-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(200,146,42,0.15);
+  border: 1px solid rgba(200,146,42,0.3);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--gold);
+  margin-top: 8px;
+}
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="uni-logo">NEU</div>
+    <div class="header-text">
+      <div class="subtitle">Necmettin Erbakan University</div>
+      <h1>School of Foreign Languages · English Preparatory Programme<br/>
+      <em style="font-style:italic;font-weight:300;font-size:0.85em;color:var(--muted)">Listening Practices for Students</em></h1>
+    </div>
+    <div class="header-badge">🎧 Level 1 &amp; 2</div>
+  </div>
+</header>
+
+<!-- HERO STRIP -->
+<div class="hero-strip">
+  <p>Welcome to the <strong>NEU EPP Listening Practice Portal</strong>. Click on any exercise below to expand it. Read the article, listen to the audio, then complete the exercises. Use the <strong>Check Answers</strong> button to see your results instantly.</p>
+</div>
+
+<main class="main" id="exercises">
+
+<!-- ════════════════════════════════════════════════════
+     EXERCISE 1 – Trudeau and Canada's Indigenous People
+═══════════════════════════════════════════════════════ -->
+<div class="exercise" id="ex1">
+  <div class="exercise-header" onclick="toggleEx('ex1')">
+    <div class="ex-number">1</div>
+    <div class="ex-meta">
+      <div class="ex-level">Level 1 · News</div>
+      <div class="ex-title">Trudeau and Canada's Indigenous People</div>
+    </div>
+    <div class="ex-chevron">▾</div>
+  </div>
+  <div class="exercise-body">
+    <div class="tabs-nav">
+      <button class="tab-btn active" onclick="openTab(this,'ex1-text')">📄 Text &amp; Audio</button>
+      <button class="tab-btn" onclick="openTab(this,'ex1-mcq')">🔵 Multiple Choice</button>
+      <button class="tab-btn" onclick="openTab(this,'ex1-fill')">✏️ Fill in the Blanks</button>
+      <button class="tab-btn" onclick="openTab(this,'ex1-vocab')">📚 Vocabulary</button>
+      <button class="tab-btn" onclick="openTab(this,'ex1-write')">🖊️ Writing</button>
+      <button class="tab-btn" onclick="openTab(this,'ex1-gloss')">📖 Glossary</button>
+    </div>
+
+    <!-- TEXT TAB -->
+    <div class="tab-content active" id="ex1-text">
+      <a class="article-link-btn" href="https://www.newsinlevels.com/products/trudeau-and-canadas-indigenous-people-level-1/" target="_blank">🔗 Open Original Article</a>
+      <div class="article-text">
+        <p>In 2015, Prime Minister Trudeau promises to help Canada's <strong>Indigenous</strong> people. He wants to stop so many from going to prison.</p>
+        <p>But now, the problem is worse. Indigenous people are a small part of Canada's population. But many are in prison or under <strong>rules</strong> after leaving. Marvin Starblanket is an Indigenous man. He stays in prison for many years. Now, he has a five-year rule which controls where he lives and works.</p>
+        <p>Many Indigenous people have the same problem. They are poor or go through difficult things. Some think that these rules help. Others say they take away <strong>freedom</strong>. Starblanket wants to study and help Indigenous people in the future.</p>
+      </div>
+      <div class="sc-player-wrap">
+        <div class="sc-player-label">🎧 &nbsp;LISTEN NOW — Trudeau &amp; Indigenous People – Level 1</div>
+        <iframe scrolling="no" frameborder="no" allow="autoplay"
+          src="https://w.soundcloud.com/player/?url=https://soundcloud.com/newsinlevels/trudeau-and-canadas-indigenous&color=%23c8922a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"
+          height="80">
+        </iframe>
+      </div>
+      </div>
+    </div>
+
+    <!-- MCQ TAB -->
+    <div class="tab-content" id="ex1-mcq">
+      <div class="questions-section">
+        <h3><span class="q-icon">🔵</span> Multiple Choice Questions</h3>
+
+        <div class="question-block" id="ex1-mcq-1">
+          <div class="q-num">Question 1 of 5</div>
+          <div class="q-text">When did Trudeau promise to help Canada's Indigenous people?</div>
+          <div class="options">
+            <label class="option-label"><input type="radio" name="ex1-m1" value="a"/> In 2010</label>
+            <label class="option-label"><input type="radio" name="ex1-m1" value="b"/> In 2015</label>
+            <label class="option-label"><input type="radio" name="ex1-m1" value="c"/> In 2020</label>
+            <label class="option-label"><input type="radio" name="ex1-m1" value="d"/> In 2005</label>
+          </div>
+          <div class="feedback" id="fb-ex1-m1"></div>
+        </div>
+
+        <div class="question-block" id="ex1-mcq-2">
+          <div class="q-num">Question 2 of 5</div>
+          <div class="q-text">What kind of rule does Marvin Starblanket now live under?</div>
+          <div class="options">
+            <label class="option-label"><input type="radio" name="ex1-m2" value="a"/> A ten-year travel ban</label>
+            <label class="option-label"><input type="radio" name="ex1-m2" value="b"/> A five-year rule controlling where he lives and works</label>
+            <label class="option-label"><input type="radio" name="ex1-m2" value="c"/> A two-year community service order</label>
+            <label class="option-label"><input type="radio" name="ex1-m2" value="d"/> A lifelong curfew</label>
+          </div>
+          <div class="feedback" id="fb-ex1-m2"></div>
+        </div>
+
+        <div class="question-block" id="ex1-mcq-3">
+          <div class="q-num">Question 3 of 5</div>
+          <div class="q-text">What does Trudeau want to stop?</div>
+          <div class="options">
+            <label class="option-label"><input type="radio" name="ex1-m3" value="a"/> Indigenous people from leaving the country</label>
+            <label class="option-label"><input type="radio" name="ex1-m3" value="b"/> So many Indigenous people from going to prison</label>
+            <label class="option-label"><input type="radio" name="ex1-m3" value="c"/> The government from making new laws</label>
+            <label class="option-label"><input type="radio" name="ex1-m3" value="d"/> Foreigners from entering Canada</label>
+          </div>
+          <div class="feedback" id="fb-ex1-m3"></div>
+        </div>
+
+        <div class="question-block" id="ex1-mcq-4">
+          <div class="q-num">Question 4 of 5</div>
+          <div class="q-text">What does Starblanket want to do in the future?</div>
+          <div class="options">
+            <label class="option-label"><input type="radio" name="ex1-m4" value="a"/> Become a politician</label>
+            <label class="option-label"><input type="radio" name="ex1-m4" value="b"/> Leave Canada</label>
+            <label class="option-label"><input type="radio" name="ex1-m4" value="c"/> Study and help Indigenous people</label>
+            <label class="option-label"><input type="radio" name="ex1-m4" value="d"/> Open a business</label>
+          </div>
+          <div class="feedback" id="fb-ex1-m4"></div>
+        </div>
+
+        <div class="question-block" id="ex1-mcq-5">
+          <div class="q-num">Question 5 of 5</div>
+          <div class="q-text">According to the text, what do some people think about the rules?</div>
+          <div class="options">
+            <label class="option-label"><input type="radio" name="ex1-m5" value="a"/> They are unfair and need to be removed immediately</label>
+            <label class="option-label"><input type="radio" name="ex1-m5" value="b"/> Some think the rules help, others say they take away freedom</label>
+            <label class="option-label"><input type="radio" name="ex1-m5" value="c"/> Everyone agrees the rules are helpful</label>
+            <label class="option-label"><input type="radio" name="ex1-m5" value="d"/> The rules have no real effect</label>
+          </div>
+          <div class="feedback" id="fb-ex1-m5"></div>
+        </div>
+
+        <button class="check-btn" onclick="checkMCQ('ex1', {1:'b',2:'b',3:'b',4:'c',5:'b'})">✓ Check Answers</button>
+        <div class="score-display" id="score-ex1-mcq"></div>
+      </div>
+    </div>
+
+    <!-- FILL TAB -->
+    <div class="tab-content" id="ex1-fill">
+      <div class="questions-section">
+        <h3><span class="q-icon">✏️</span> Fill in the Blanks</h3>
+
+        <div class="question-block" id="ex1-f1">
+          <div class="q-num">Question 1 of 5</div>
+          <div class="q-text">In 2015, Prime Minister Trudeau promises to help Canada's __________ people.</div>
+          <input class="fill-input" type="text" id="fi-ex1-1" placeholder="Type your answer..."/>
+          <div class="feedback" id="ffb-ex1-1"></div>
+        </div>
+
+        <div class="question-block" id="ex1-f2">
+          <div class="q-num">Question 2 of 5</div>
+          <div class="q-text">Marvin Starblanket is an Indigenous man who stays in prison for many __________ .</div>
+          <input class="fill-input" type="text" id="fi-ex1-2" placeholder="Type your answer..."/>
+          <div class="feedback" id="ffb-ex1-2"></div>
+        </div>
+
+        <div class="question-block" id="ex1-f3">
+          <div class="q-num">Question 3 of 5</div>
+          <div class="q-text">Indigenous people are a small part of Canada's __________ .</div>
+          <input class="fill-input" type="text" id="fi-ex1-3" placeholder="Type your answer..."/>
+          <div class="feedback" id="ffb-ex1-3"></div>
+        </div>
+
+        <div class="question-block" id="ex1-f4">
+          <div class="q-num">Question 4 of 5</div>
+          <div class="q-text">Some people say the rules take away their __________ .</div>
+          <input class="fill-input" type="text" id="fi-ex1-4" placeholder="Type your answer..."/>
+          <div class="feedback" id="ffb-ex1-4"></div>
+        </div>
+
+        <div class="question-block" id="ex1-f5">
+          <div class="q-num">Question 5 of 5</div>
+          <div class="q-text">The five-year rule controls where Starblanket __________ and works.</div>
+          <input class="fill-input" type="text" id="fi-ex1-5" placeholder="Type your answer..."/>
+          <div class="feedback" id="ffb-ex1-5"></div>
+        </div>
+
+        <button class="check-btn" onclick="checkFill('ex1', ['indigenous','years','population','freedom','lives'])">✓ Check Answers</button>
+        <div class="score-display" id="score-ex1-fill"></div>
+      </div>
+    </div>
+
+    <!-- VOCAB TAB -->
+    <div class="tab-content" id="ex1-vocab">
+      <div class="questions-section">
+        <h3><span class="q-icon">📚</span> Vocabulary – Meaning Match</h3>
+
+        <div class="question-block" id="ex1-v1">
+          <div class="q-num">Question 1 of 5</div>
+          <div class="q-text">What does <strong>"Indigenous"</strong> mean?</div>
+          <div class="vocab-options">
+            <label class="vocab-option"><input type="radio" name="ex1-voc1" value="a"/> People who moved to a place recently</label>
+            <label class="vocab-option"><input type="radio" name="ex1-voc1" value="b"/> People who live in a place for a long time originally</label>
+            <label class="vocab-option"><input type="radio" name="ex1-voc1" value="c"/> People who travel between countries</label>
+            <label class="vocab-option"><input type="radio" name="ex1-voc1" value="d"/> A government leader</label>
+          </div>
+          <div class="feedback" id="vfb-ex1-1"></div>
+        </div>
+
+        <div class="question-block" id="ex1-v2">
+          <div class="q-num">Question 2 of 5</div>
+          <div class="q-text">What does <strong>"freedom"</strong> mean?</div>
+          <div class="vocab-options">
+            <label class="vocab-option"><input type="radio" name="ex1-voc2" value="a"/> Being kept in prison</label>
+            <label class="vocab-option"><input type="radio" name="ex1-voc2" value="b"/> Following strict rules</label>
+            <label class="vocab-option"><input type="radio" name="ex1-voc2" value="c"/> The ability to do what you want without control</label>
+            <label class="vocab-option"><input type="radio" name="ex1-voc2" value="d"/> Working for the government</label>
+          </div>
+          <div class="feedback" id="vfb-ex1-2"></div>
+        </div>
+
+        <div class="question-block" id="ex1-v3">
+          <div class="q-num">Question 3 of 5</div>
+          <div class="q-text">What does <strong>"population"</strong> mean?</div>
+          <div class="vocab-options">
+            <label class="vocab-option"><input type="radio" name="ex1-voc3" value="a"/> The total number of people in a place</label>
+            <label class="vocab-option"><input type="radio" name="ex1-voc3" value="b"/> The land area of a country</label>
+            <label class="vocab-option"><input type="radio" name="ex1-voc3" value="c"/> A group of soldiers</label>
+            <label class="vocab-option"><input type="radio" name="ex1-voc3" value="d"/> A type of government policy</label>
+          </div>
+          <div class="feedback" id="vfb-ex1-3"></div>
+        </div>
+
+        <div class="question-block" id="ex1-v4">
+          <div class="q-num">Question 4 of 5</div>
+          <div class="q-text">What does <strong>"rule"</strong> mean in this context?</div>
+          <div class="vocab-options">
+            <label class="vocab-option"><input type="radio" name="ex1-voc4" value="a"/> A game instruction</label>
+            <label class="vocab-option"><input type="radio" name="ex1-voc4" value="b"/> A condition a person must follow after leaving prison</label>
+            <label class="vocab-option"><input type="radio" name="ex1-voc4" value="c"/> A type of punishment</label>
+            <label class="vocab-option"><input type="radio" name="ex1-voc4" value="d"/> A new law passed in parliament</label>
+          </div>
+          <div class="feedback" id="vfb-ex1-4"></div>
+        </div>
+
+        <div class="question-block" id="ex1-v5">
+          <div class="q-num">Question 5 of 5</div>
+          <div class="q-text">What does <strong>"promise"</strong> mean?</div>
+          <div class="vocab-options">
+            <label class="vocab-option"><input type="radio" name="ex1-voc5" value="a"/> To forget something important</label>
+            <label class="vocab-option"><input type="radio" name="ex1-voc5" value="b"/> To say you will definitely do something</label>
+            <label class="vocab-option"><input type="radio" name="ex1-voc5" value="c"/> To ask someone for help</label>
+            <label class="vocab-option"><input type="radio" name="ex1-voc5" value="d"/> To punish someone</label>
+          </div>
+          <div class="feedback" id="vfb-ex1-5"></div>
+        </div>
+
+        <button class="check-btn" onclick="checkVocab('ex1', {1:'b',2:'c',3:'a',4:'b',5:'b'})">✓ Check Answers</button>
+        <div class="score-display" id="score-ex1-vocab"></div>
+      </div>
+    </div>
+
+    <!-- WRITING TAB -->
+    <div class="tab-content" id="ex1-write">
+      <div class="questions-section">
+        <h3><span class="q-icon">🖊️</span> Writing Task</h3>
+        <div class="writing-prompt">
+          <strong>Write a short paragraph (60–100 words):</strong><br/><br/>
+          Trudeau made a promise in 2015 to help Indigenous people in Canada, but the situation has become worse. Do you think politicians always keep their promises? Why or why not? Use examples from the text and your own ideas to support your answer.
+        </div>
+        <textarea class="writing-area" id="write-ex1" placeholder="Write your paragraph here..." oninput="countWords(this,'wc-ex1')"></textarea>
+        <div class="word-count" id="wc-ex1">Words: 0</div>
+      <button class="writing-check-btn" id="check-btn-ex1" onclick="checkWriting('ex1')">
+        <div class="spinner"></div>
+        <span class="btn-text">✦ AI Feedback — Check My Writing</span>
+      </button>
+      <div class="ai-feedback-box" id="ai-fb-ex1">
+        <div class="ai-fb-header">
+          <span class="ai-icon">🤖</span>
+          <span class="ai-title">AI Writing Feedback</span>
+        </div>
+        <div class="ai-fb-body" id="ai-fb-body-ex1">Loading…</div>
+      </div>
+      </div>
+    </div>
+
+    <!-- GLOSSARY TAB -->
+    <div class="tab-content" id="ex1-gloss">
+      <div class="glossary-grid">
+        <div class="gloss-card">
+          <div class="gloss-word">Indigenous</div>
+          <div class="gloss-pos">adjective</div>
+          <div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Yerli, yerliye ait</div>
+          <div class="gloss-en">originally from a place; native</div>
+        </div>
+        <div class="gloss-card">
+          <div class="gloss-word">Freedom</div>
+          <div class="gloss-pos">noun</div>
+          <div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Özgürlük</div>
+          <div class="gloss-en">the right to act without restriction</div>
+        </div>
+        <div class="gloss-card">
+          <div class="gloss-word">Population</div>
+          <div class="gloss-pos">noun</div>
+          <div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Nüfus</div>
+          <div class="gloss-en">all people living in a place</div>
+        </div>
+        <div class="gloss-card">
+          <div class="gloss-word">Promise</div>
+          <div class="gloss-pos">verb / noun</div>
+          <div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Söz vermek / söz</div>
+          <div class="gloss-en">a commitment to do something</div>
+        </div>
+        <div class="gloss-card">
+          <div class="gloss-word">Prison</div>
+          <div class="gloss-pos">noun</div>
+          <div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Cezaevi, hapishane</div>
+          <div class="gloss-en">a place where people are kept as punishment</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     EXERCISE 2 – AI and War
+═══════════════════════════════════════════════════════ -->
+<div class="exercise" id="ex2">
+  <div class="exercise-header" onclick="toggleEx('ex2')">
+    <div class="ex-number">2</div>
+    <div class="ex-meta">
+      <div class="ex-level">Level 1 · Technology</div>
+      <div class="ex-title">AI and War</div>
+    </div>
+    <div class="ex-chevron">▾</div>
+  </div>
+  <div class="exercise-body">
+    <div class="tabs-nav">
+      <button class="tab-btn active" onclick="openTab(this,'ex2-text')">📄 Text &amp; Audio</button>
+      <button class="tab-btn" onclick="openTab(this,'ex2-mcq')">🔵 Multiple Choice</button>
+      <button class="tab-btn" onclick="openTab(this,'ex2-fill')">✏️ Fill in the Blanks</button>
+      <button class="tab-btn" onclick="openTab(this,'ex2-vocab')">📚 Vocabulary</button>
+      <button class="tab-btn" onclick="openTab(this,'ex2-write')">🖊️ Writing</button>
+      <button class="tab-btn" onclick="openTab(this,'ex2-gloss')">📖 Glossary</button>
+    </div>
+
+    <div class="tab-content active" id="ex2-text">
+      <a class="article-link-btn" href="https://www.newsinlevels.com/products/ai-and-war-level-1/" target="_blank">🔗 Open Original Article</a>
+      <div class="article-text">
+        <p>Countries use AI in modern war. The US military uses AI to study images and choose people and buildings to attack. AI also helps leaders think about <strong>battle</strong> situations.</p>
+        <p>Some government groups also use AI to watch and <strong>track</strong> people. Many people worry about this because of <strong>privacy</strong>. Companies and leaders are talking about using AI safely.</p>
+        <p>Experts also see a big problem. In tests, many AI systems speak about nuclear bombs in new wars. Some companies have more rules about their AI. Experts say that countries need clear rules for AI in war.</p>
+      </div>
+      <div class="sc-player-wrap">
+        <div class="sc-player-label">🎧 &nbsp;LISTEN NOW — AI and War – Level 1</div>
+        <iframe scrolling="no" frameborder="no" allow="autoplay"
+          src="https://w.soundcloud.com/player/?url=https://soundcloud.com/newsinlevels/ai-and-war-level-1&color=%23c8922a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"
+          height="80">
+        </iframe>
+      </div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="ex2-mcq">
+      <div class="questions-section">
+        <h3><span class="q-icon">🔵</span> Multiple Choice Questions</h3>
+
+        <div class="question-block"><div class="q-num">Question 1 of 5</div>
+          <div class="q-text">How does the US military use AI?</div>
+          <div class="options">
+            <label class="option-label"><input type="radio" name="ex2-m1" value="a"/> To train new soldiers</label>
+            <label class="option-label"><input type="radio" name="ex2-m1" value="b"/> To study images and choose targets</label>
+            <label class="option-label"><input type="radio" name="ex2-m1" value="c"/> To write military reports</label>
+            <label class="option-label"><input type="radio" name="ex2-m1" value="d"/> To design weapons</label>
+          </div><div class="feedback" id="fb-ex2-m1"></div>
+        </div>
+
+        <div class="question-block"><div class="q-num">Question 2 of 5</div>
+          <div class="q-text">Why do many people worry about AI watching people?</div>
+          <div class="options">
+            <label class="option-label"><input type="radio" name="ex2-m2" value="a"/> Because of cost</label>
+            <label class="option-label"><input type="radio" name="ex2-m2" value="b"/> Because of privacy</label>
+            <label class="option-label"><input type="radio" name="ex2-m2" value="c"/> Because it is slow</label>
+            <label class="option-label"><input type="radio" name="ex2-m2" value="d"/> Because of technical errors</label>
+          </div><div class="feedback" id="fb-ex2-m2"></div>
+        </div>
+
+        <div class="question-block"><div class="q-num">Question 3 of 5</div>
+          <div class="q-text">What do experts say countries need for AI in war?</div>
+          <div class="options">
+            <label class="option-label"><input type="radio" name="ex2-m3" value="a"/> More soldiers</label>
+            <label class="option-label"><input type="radio" name="ex2-m3" value="b"/> Faster computers</label>
+            <label class="option-label"><input type="radio" name="ex2-m3" value="c"/> Clear rules</label>
+            <label class="option-label"><input type="radio" name="ex2-m3" value="d"/> International meetings</label>
+          </div><div class="feedback" id="fb-ex2-m3"></div>
+        </div>
+
+        <div class="question-block"><div class="q-num">Question 4 of 5</div>
+          <div class="q-text">What do AI systems mention in tests about new wars?</div>
+          <div class="options">
+            <label class="option-label"><input type="radio" name="ex2-m4" value="a"/> Diplomatic solutions</label>
+            <label class="option-label"><input type="radio" name="ex2-m4" value="b"/> Economic sanctions</label>
+            <label class="option-label"><input type="radio" name="ex2-m4" value="c"/> Nuclear bombs</label>
+            <label class="option-label"><input type="radio" name="ex2-m4" value="d"/> Cyber attacks</label>
+          </div><div class="feedback" id="fb-ex2-m4"></div>
+        </div>
+
+        <div class="question-block"><div class="q-num">Question 5 of 5</div>
+          <div class="q-text">AI also helps leaders think about what?</div>
+          <div class="options">
+            <label class="option-label"><input type="radio" name="ex2-m5" value="a"/> Economic plans</label>
+            <label class="option-label"><input type="radio" name="ex2-m5" value="b"/> Battle situations</label>
+            <label class="option-label"><input type="radio" name="ex2-m5" value="c"/> Peace treaties</label>
+            <label class="option-label"><input type="radio" name="ex2-m5" value="d"/> Social media campaigns</label>
+          </div><div class="feedback" id="fb-ex2-m5"></div>
+        </div>
+
+        <button class="check-btn" onclick="checkMCQ('ex2', {1:'b',2:'b',3:'c',4:'c',5:'b'})">✓ Check Answers</button>
+        <div class="score-display" id="score-ex2-mcq"></div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="ex2-fill">
+      <div class="questions-section">
+        <h3><span class="q-icon">✏️</span> Fill in the Blanks</h3>
+        <div class="question-block"><div class="q-num">Question 1 of 5</div><div class="q-text">Countries use AI in modern __________ .</div><input class="fill-input" type="text" id="fi-ex2-1" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex2-1"></div></div>
+        <div class="question-block"><div class="q-num">Question 2 of 5</div><div class="q-text">Some government groups use AI to watch and __________ people.</div><input class="fill-input" type="text" id="fi-ex2-2" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex2-2"></div></div>
+        <div class="question-block"><div class="q-num">Question 3 of 5</div><div class="q-text">Many people worry about AI because of __________ .</div><input class="fill-input" type="text" id="fi-ex2-3" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex2-3"></div></div>
+        <div class="question-block"><div class="q-num">Question 4 of 5</div><div class="q-text">In tests, many AI systems speak about nuclear __________ .</div><input class="fill-input" type="text" id="fi-ex2-4" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex2-4"></div></div>
+        <div class="question-block"><div class="q-num">Question 5 of 5</div><div class="q-text">Experts say that countries need clear __________ for AI in war.</div><input class="fill-input" type="text" id="fi-ex2-5" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex2-5"></div></div>
+        <button class="check-btn" onclick="checkFill('ex2', ['war','track','privacy','bombs','rules'])">✓ Check Answers</button>
+        <div class="score-display" id="score-ex2-fill"></div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="ex2-vocab">
+      <div class="questions-section">
+        <h3><span class="q-icon">📚</span> Vocabulary – Meaning Match</h3>
+        <div class="question-block"><div class="q-num">Q1</div><div class="q-text">What does <strong>"battle"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex2-v1" value="a"/> A political debate</label><label class="vocab-option"><input type="radio" name="ex2-v1" value="b"/> A fight in a war</label><label class="vocab-option"><input type="radio" name="ex2-v1" value="c"/> A peaceful meeting</label><label class="vocab-option"><input type="radio" name="ex2-v1" value="d"/> A type of weapon</label></div><div class="feedback" id="vfb-ex2-1"></div></div>
+        <div class="question-block"><div class="q-num">Q2</div><div class="q-text">What does <strong>"track"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex2-v2" value="a"/> To destroy something</label><label class="vocab-option"><input type="radio" name="ex2-v2" value="b"/> To build a road</label><label class="vocab-option"><input type="radio" name="ex2-v2" value="c"/> To follow where someone goes</label><label class="vocab-option"><input type="radio" name="ex2-v2" value="d"/> To photograph someone</label></div><div class="feedback" id="vfb-ex2-2"></div></div>
+        <div class="question-block"><div class="q-num">Q3</div><div class="q-text">What does <strong>"privacy"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex2-v3" value="a"/> Public information</label><label class="vocab-option"><input type="radio" name="ex2-v3" value="b"/> Keeping personal life and info to yourself</label><label class="vocab-option"><input type="radio" name="ex2-v3" value="c"/> A government secret</label><label class="vocab-option"><input type="radio" name="ex2-v3" value="d"/> Military data</label></div><div class="feedback" id="vfb-ex2-3"></div></div>
+        <div class="question-block"><div class="q-num">Q4</div><div class="q-text">What does <strong>"military"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex2-v4" value="a"/> A civilian police force</label><label class="vocab-option"><input type="radio" name="ex2-v4" value="b"/> The armed forces of a country</label><label class="vocab-option"><input type="radio" name="ex2-v4" value="c"/> A technology company</label><label class="vocab-option"><input type="radio" name="ex2-v4" value="d"/> A type of AI system</label></div><div class="feedback" id="vfb-ex2-4"></div></div>
+        <div class="question-block"><div class="q-num">Q5</div><div class="q-text">What does <strong>"expert"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex2-v5" value="a"/> A beginner in a field</label><label class="vocab-option"><input type="radio" name="ex2-v5" value="b"/> A person who knows very little</label><label class="vocab-option"><input type="radio" name="ex2-v5" value="c"/> A person with great knowledge or skill</label><label class="vocab-option"><input type="radio" name="ex2-v5" value="d"/> A government official</label></div><div class="feedback" id="vfb-ex2-5"></div></div>
+        <button class="check-btn" onclick="checkVocab('ex2', {1:'b',2:'c',3:'b',4:'b',5:'c'})">✓ Check Answers</button>
+        <div class="score-display" id="score-ex2-vocab"></div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="ex2-write">
+      <div class="questions-section">
+        <h3><span class="q-icon">🖊️</span> Writing Task</h3>
+        <div class="writing-prompt">
+          <strong>Write a short paragraph (60–100 words):</strong><br/><br/>
+          The article says that AI is now used in modern war, but many people are worried about this. What do you think are the biggest risks of using AI in military situations? Should there be international rules about this? Explain your ideas using information from the text.
+        </div>
+        <textarea class="writing-area" id="write-ex2" placeholder="Write your paragraph here..." oninput="countWords(this,'wc-ex2')"></textarea>
+        <div class="word-count" id="wc-ex2">Words: 0</div>
+      <button class="writing-check-btn" id="check-btn-ex2" onclick="checkWriting('ex2')">
+        <div class="spinner"></div>
+        <span class="btn-text">✦ AI Feedback — Check My Writing</span>
+      </button>
+      <div class="ai-feedback-box" id="ai-fb-ex2">
+        <div class="ai-fb-header">
+          <span class="ai-icon">🤖</span>
+          <span class="ai-title">AI Writing Feedback</span>
+        </div>
+        <div class="ai-fb-body" id="ai-fb-body-ex2">Loading…</div>
+      </div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="ex2-gloss">
+      <div class="glossary-grid">
+        <div class="gloss-card"><div class="gloss-word">Battle</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Muharebe, savaş</div><div class="gloss-en">a fight between armies in a war</div></div>
+        <div class="gloss-card"><div class="gloss-word">Track</div><div class="gloss-pos">verb</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Takip etmek, izini sürmek</div><div class="gloss-en">to follow the movements of someone</div></div>
+        <div class="gloss-card"><div class="gloss-word">Privacy</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Mahremiyet, kişisel gizlilik</div><div class="gloss-en">the right to keep personal information private</div></div>
+        <div class="gloss-card"><div class="gloss-word">Military</div><div class="gloss-pos">noun / adj</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Askeri, ordu</div><div class="gloss-en">related to the armed forces</div></div>
+        <div class="gloss-card"><div class="gloss-word">Nuclear</div><div class="gloss-pos">adjective</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Nükleer</div><div class="gloss-en">relating to nuclear energy or weapons</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     EXERCISE 3 – OpenAI and the Pentagon
+═══════════════════════════════════════════════════════ -->
+<div class="exercise" id="ex3">
+  <div class="exercise-header" onclick="toggleEx('ex3')">
+    <div class="ex-number">3</div>
+    <div class="ex-meta">
+      <div class="ex-level">Level 1 · Technology</div>
+      <div class="ex-title">OpenAI Changes the Deal with the Pentagon</div>
+    </div>
+    <div class="ex-chevron">▾</div>
+  </div>
+  <div class="exercise-body">
+    <div class="tabs-nav">
+      <button class="tab-btn active" onclick="openTab(this,'ex3-text')">📄 Text &amp; Audio</button>
+      <button class="tab-btn" onclick="openTab(this,'ex3-mcq')">🔵 Multiple Choice</button>
+      <button class="tab-btn" onclick="openTab(this,'ex3-fill')">✏️ Fill in the Blanks</button>
+      <button class="tab-btn" onclick="openTab(this,'ex3-vocab')">📚 Vocabulary</button>
+      <button class="tab-btn" onclick="openTab(this,'ex3-write')">🖊️ Writing</button>
+      <button class="tab-btn" onclick="openTab(this,'ex3-gloss')">📖 Glossary</button>
+    </div>
+    <div class="tab-content active" id="ex3-text">
+      <a class="article-link-btn" href="https://www.newsinlevels.com/products/openai-changes-the-deal-with-the-pentagon-level-1/" target="_blank">🔗 Open Original Article</a>
+      <div class="article-text">
+        <p>The US <strong>government</strong> works with technology companies which make AI. One company, Anthropic, has a problem with the <strong>military</strong>. The company does not want the military to use its AI without rules. So the government stops working with it.</p>
+        <p>Another company, OpenAI, makes a deal with the Pentagon. But many people say that the company makes the deal too quickly. The leader of OpenAI says that the company will change the deal. It will have more <strong>safety rules</strong>.</p>
+        <p>Many companies now want to work with the military on AI technology. Some people think that AI will be important in new wars. Many people worry about new risks.</p>
+      </div>
+      <div class="sc-player-wrap">
+        <div class="sc-player-label">🎧 &nbsp;LISTEN NOW — OpenAI &amp; Pentagon – Level 1</div>
+        <iframe scrolling="no" frameborder="no" allow="autoplay"
+          src="https://w.soundcloud.com/player/?url=https://soundcloud.com/newsinlevels/openai-changes-the-deal-with&color=%23c8922a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"
+          height="80">
+        </iframe>
+      </div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex3-mcq">
+      <div class="questions-section"><h3><span class="q-icon">🔵</span> Multiple Choice Questions</h3>
+        <div class="question-block"><div class="q-num">Q1</div><div class="q-text">Why did the government stop working with Anthropic?</div><div class="options"><label class="option-label"><input type="radio" name="ex3-m1" value="a"/> Anthropic's AI was too slow</label><label class="option-label"><input type="radio" name="ex3-m1" value="b"/> Anthropic did not want the military using its AI without rules</label><label class="option-label"><input type="radio" name="ex3-m1" value="c"/> Anthropic asked for too much money</label><label class="option-label"><input type="radio" name="ex3-m1" value="d"/> Anthropic is a foreign company</label></div><div class="feedback" id="fb-ex3-m1"></div></div>
+        <div class="question-block"><div class="q-num">Q2</div><div class="q-text">What deal did OpenAI make?</div><div class="options"><label class="option-label"><input type="radio" name="ex3-m2" value="a"/> A deal with universities</label><label class="option-label"><input type="radio" name="ex3-m2" value="b"/> A deal with European governments</label><label class="option-label"><input type="radio" name="ex3-m2" value="c"/> A deal with the Pentagon</label><label class="option-label"><input type="radio" name="ex3-m2" value="d"/> A deal with NASA</label></div><div class="feedback" id="fb-ex3-m2"></div></div>
+        <div class="question-block"><div class="q-num">Q3</div><div class="q-text">What will the new OpenAI deal include?</div><div class="options"><label class="option-label"><input type="radio" name="ex3-m3" value="a"/> More money</label><label class="option-label"><input type="radio" name="ex3-m3" value="b"/> More safety rules</label><label class="option-label"><input type="radio" name="ex3-m3" value="c"/> More employees</label><label class="option-label"><input type="radio" name="ex3-m3" value="d"/> A new headquarters</label></div><div class="feedback" id="fb-ex3-m3"></div></div>
+        <div class="question-block"><div class="q-num">Q4</div><div class="q-text">Why do many people worry?</div><div class="options"><label class="option-label"><input type="radio" name="ex3-m4" value="a"/> About new risks of AI in war</label><label class="option-label"><input type="radio" name="ex3-m4" value="b"/> About job losses in tech</label><label class="option-label"><input type="radio" name="ex3-m4" value="c"/> About government spending</label><label class="option-label"><input type="radio" name="ex3-m4" value="d"/> About data storage</label></div><div class="feedback" id="fb-ex3-m4"></div></div>
+        <div class="question-block"><div class="q-num">Q5</div><div class="q-text">What is the Pentagon?</div><div class="options"><label class="option-label"><input type="radio" name="ex3-m5" value="a"/> A tech company</label><label class="option-label"><input type="radio" name="ex3-m5" value="b"/> The US Department of Defense</label><label class="option-label"><input type="radio" name="ex3-m5" value="c"/> A type of AI system</label><label class="option-label"><input type="radio" name="ex3-m5" value="d"/> A government hospital</label></div><div class="feedback" id="fb-ex3-m5"></div></div>
+        <button class="check-btn" onclick="checkMCQ('ex3', {1:'b',2:'c',3:'b',4:'a',5:'b'})">✓ Check Answers</button>
+        <div class="score-display" id="score-ex3-mcq"></div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex3-fill">
+      <div class="questions-section"><h3><span class="q-icon">✏️</span> Fill in the Blanks</h3>
+        <div class="question-block"><div class="q-num">Q1</div><div class="q-text">The US __________ works with technology companies which make AI.</div><input class="fill-input" type="text" id="fi-ex3-1" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex3-1"></div></div>
+        <div class="question-block"><div class="q-num">Q2</div><div class="q-text">Anthropic does not want the military to use its AI without __________ .</div><input class="fill-input" type="text" id="fi-ex3-2" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex3-2"></div></div>
+        <div class="question-block"><div class="q-num">Q3</div><div class="q-text">OpenAI makes a __________ with the Pentagon.</div><input class="fill-input" type="text" id="fi-ex3-3" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex3-3"></div></div>
+        <div class="question-block"><div class="q-num">Q4</div><div class="q-text">The new deal will have more safety __________ .</div><input class="fill-input" type="text" id="fi-ex3-4" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex3-4"></div></div>
+        <div class="question-block"><div class="q-num">Q5</div><div class="q-text">Many people worry about new __________ from AI in war.</div><input class="fill-input" type="text" id="fi-ex3-5" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex3-5"></div></div>
+        <button class="check-btn" onclick="checkFill('ex3', ['government','rules','deal','rules','risks'])">✓ Check Answers</button>
+        <div class="score-display" id="score-ex3-fill"></div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex3-vocab">
+      <div class="questions-section"><h3><span class="q-icon">📚</span> Vocabulary – Meaning Match</h3>
+        <div class="question-block"><div class="q-num">Q1</div><div class="q-text">What does <strong>"government"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex3-v1" value="a"/> A large company</label><label class="vocab-option"><input type="radio" name="ex3-v1" value="b"/> The group of people who run a country</label><label class="vocab-option"><input type="radio" name="ex3-v1" value="c"/> A type of technology</label><label class="vocab-option"><input type="radio" name="ex3-v1" value="d"/> A military unit</label></div><div class="feedback" id="vfb-ex3-1"></div></div>
+        <div class="question-block"><div class="q-num">Q2</div><div class="q-text">What does <strong>"deal"</strong> mean in this context?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex3-v2" value="a"/> A discount in a shop</label><label class="vocab-option"><input type="radio" name="ex3-v2" value="b"/> An official agreement between two parties</label><label class="vocab-option"><input type="radio" name="ex3-v2" value="c"/> A type of card game</label><label class="vocab-option"><input type="radio" name="ex3-v2" value="d"/> A military operation</label></div><div class="feedback" id="vfb-ex3-2"></div></div>
+        <div class="question-block"><div class="q-num">Q3</div><div class="q-text">What does <strong>"safety rules"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex3-v3" value="a"/> Laws about traffic</label><label class="vocab-option"><input type="radio" name="ex3-v3" value="b"/> Instructions to prevent harm or danger</label><label class="vocab-option"><input type="radio" name="ex3-v3" value="c"/> Rules about building design</label><label class="vocab-option"><input type="radio" name="ex3-v3" value="d"/> Regulations about food</label></div><div class="feedback" id="vfb-ex3-3"></div></div>
+        <div class="question-block"><div class="q-num">Q4</div><div class="q-text">What does <strong>"risk"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex3-v4" value="a"/> A guaranteed benefit</label><label class="vocab-option"><input type="radio" name="ex3-v4" value="b"/> Something that is free</label><label class="vocab-option"><input type="radio" name="ex3-v4" value="c"/> The chance of something dangerous happening</label><label class="vocab-option"><input type="radio" name="ex3-v4" value="d"/> A military rank</label></div><div class="feedback" id="vfb-ex3-4"></div></div>
+        <div class="question-block"><div class="q-num">Q5</div><div class="q-text">What does <strong>"technology"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex3-v5" value="a"/> Old traditional tools</label><label class="vocab-option"><input type="radio" name="ex3-v5" value="b"/> Scientific methods and tools for practical purposes</label><label class="vocab-option"><input type="radio" name="ex3-v5" value="c"/> Books and documents</label><label class="vocab-option"><input type="radio" name="ex3-v5" value="d"/> Government policies</label></div><div class="feedback" id="vfb-ex3-5"></div></div>
+        <button class="check-btn" onclick="checkVocab('ex3', {1:'b',2:'b',3:'b',4:'c',5:'b'})">✓ Check Answers</button>
+        <div class="score-display" id="score-ex3-vocab"></div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex3-write">
+      <div class="questions-section"><h3><span class="q-icon">🖊️</span> Writing Task</h3>
+        <div class="writing-prompt"><strong>Write a short paragraph (60–100 words):</strong><br/><br/>Anthropic refused to let the military use its AI without strict rules, while OpenAI agreed to a deal but then decided to change it. Which company do you think made a better decision? Justify your opinion using ideas from the text and your own thinking.</div>
+        <textarea class="writing-area" id="write-ex3" placeholder="Write your paragraph here..." oninput="countWords(this,'wc-ex3')"></textarea>
+        <div class="word-count" id="wc-ex3">Words: 0</div>
+      <button class="writing-check-btn" id="check-btn-ex3" onclick="checkWriting('ex3')">
+        <div class="spinner"></div>
+        <span class="btn-text">✦ AI Feedback — Check My Writing</span>
+      </button>
+      <div class="ai-feedback-box" id="ai-fb-ex3">
+        <div class="ai-fb-header">
+          <span class="ai-icon">🤖</span>
+          <span class="ai-title">AI Writing Feedback</span>
+        </div>
+        <div class="ai-fb-body" id="ai-fb-body-ex3">Loading…</div>
+      </div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex3-gloss">
+      <div class="glossary-grid">
+        <div class="gloss-card"><div class="gloss-word">Government</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Hükümet</div><div class="gloss-en">the group that runs a country</div></div>
+        <div class="gloss-card"><div class="gloss-word">Deal</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Anlaşma, sözleşme</div><div class="gloss-en">an agreement between two parties</div></div>
+        <div class="gloss-card"><div class="gloss-word">Safety rules</div><div class="gloss-pos">noun phrase</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Güvenlik kuralları</div><div class="gloss-en">guidelines to prevent harm</div></div>
+        <div class="gloss-card"><div class="gloss-word">Risk</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Risk, tehlike</div><div class="gloss-en">possibility of danger or loss</div></div>
+        <div class="gloss-card"><div class="gloss-word">Pentagon</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Pentagon (ABD Savunma Bakanlığı)</div><div class="gloss-en">US Department of Defense headquarters</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     EXERCISE 4 – Inter Miami in the White House
+═══════════════════════════════════════════════════════ -->
+<div class="exercise" id="ex4">
+  <div class="exercise-header" onclick="toggleEx('ex4')">
+    <div class="ex-number">4</div>
+    <div class="ex-meta">
+      <div class="ex-level">Level 2 · Sport</div>
+      <div class="ex-title">Inter Miami Players in the White House</div>
+    </div>
+    <div class="ex-chevron">▾</div>
+  </div>
+  <div class="exercise-body">
+    <div class="tabs-nav">
+      <button class="tab-btn active" onclick="openTab(this,'ex4-text')">📄 Text &amp; Audio</button>
+      <button class="tab-btn" onclick="openTab(this,'ex4-mcq')">🔵 Multiple Choice</button>
+      <button class="tab-btn" onclick="openTab(this,'ex4-fill')">✏️ Fill in the Blanks</button>
+      <button class="tab-btn" onclick="openTab(this,'ex4-vocab')">📚 Vocabulary</button>
+      <button class="tab-btn" onclick="openTab(this,'ex4-write')">🖊️ Writing</button>
+      <button class="tab-btn" onclick="openTab(this,'ex4-gloss')">📖 Glossary</button>
+    </div>
+    <div class="tab-content active" id="ex4-text">
+      <a class="article-link-btn" href="https://www.newsinlevels.com/products/inter-miami-players-in-the-white-house-level-2/" target="_blank">🔗 Open Original Article</a>
+      <div class="article-text">
+        <p>President Donald Trump welcomed the soccer team Inter Miami to the White House. The team won the 2025 MLS Cup after a 3–1 win over Vancouver. Famous player Lionel Messi came with the team.</p>
+        <p>Trump congratulated the players and spoke about their success. He said it was special to welcome Messi because he was the first American president to do so. Trump also said his son Barron likes Messi and another famous player, Cristiano Ronaldo.</p>
+        <p>Messi and one of the team <strong>owners</strong>, Jorge Mas, gave the president a <strong>jersey</strong> with the number 47 and a soccer ball as gifts. The team celebrated their championship <strong>victory</strong> at the White House.</p>
+      </div>
+      <div class="sc-player-wrap">
+        <div class="sc-player-label">🎧 &nbsp;LISTEN NOW — Inter Miami in the White House – Level 2</div>
+        <iframe scrolling="no" frameborder="no" allow="autoplay"
+          src="https://w.soundcloud.com/player/?url=https://soundcloud.com/newsinlevels/inter-miami-players-in-the-1&color=%23c8922a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"
+          height="80">
+        </iframe>
+      </div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex4-mcq">
+      <div class="questions-section"><h3><span class="q-icon">🔵</span> Multiple Choice Questions</h3>
+        <div class="question-block"><div class="q-num">Q1</div><div class="q-text">Which team did Inter Miami beat to win the MLS Cup?</div><div class="options"><label class="option-label"><input type="radio" name="ex4-m1" value="a"/> Seattle Sounders</label><label class="option-label"><input type="radio" name="ex4-m1" value="b"/> Vancouver</label><label class="option-label"><input type="radio" name="ex4-m1" value="c"/> Toronto FC</label><label class="option-label"><input type="radio" name="ex4-m1" value="d"/> LA Galaxy</label></div><div class="feedback" id="fb-ex4-m1"></div></div>
+        <div class="question-block"><div class="q-num">Q2</div><div class="q-text">What jersey number did Messi give to Trump?</div><div class="options"><label class="option-label"><input type="radio" name="ex4-m2" value="a"/> 10</label><label class="option-label"><input type="radio" name="ex4-m2" value="b"/> 45</label><label class="option-label"><input type="radio" name="ex4-m2" value="c"/> 47</label><label class="option-label"><input type="radio" name="ex4-m2" value="d"/> 1</label></div><div class="feedback" id="fb-ex4-m2"></div></div>
+        <div class="question-block"><div class="q-num">Q3</div><div class="q-text">Who is Jorge Mas?</div><div class="options"><label class="option-label"><input type="radio" name="ex4-m3" value="a"/> Inter Miami's coach</label><label class="option-label"><input type="radio" name="ex4-m3" value="b"/> A US senator</label><label class="option-label"><input type="radio" name="ex4-m3" value="c"/> One of the team owners</label><label class="option-label"><input type="radio" name="ex4-m3" value="d"/> Messi's manager</label></div><div class="feedback" id="fb-ex4-m3"></div></div>
+        <div class="question-block"><div class="q-num">Q4</div><div class="q-text">What did Trump say about welcoming Messi?</div><div class="options"><label class="option-label"><input type="radio" name="ex4-m4" value="a"/> He was the last president to do it</label><label class="option-label"><input type="radio" name="ex4-m4" value="b"/> He was the first American president to welcome Messi</label><label class="option-label"><input type="radio" name="ex4-m4" value="c"/> It was a routine event</label><label class="option-label"><input type="radio" name="ex4-m4" value="d"/> He had met Messi before</label></div><div class="feedback" id="fb-ex4-m4"></div></div>
+        <div class="question-block"><div class="q-num">Q5</div><div class="q-text">What score did Inter Miami win by?</div><div class="options"><label class="option-label"><input type="radio" name="ex4-m5" value="a"/> 2–0</label><label class="option-label"><input type="radio" name="ex4-m5" value="b"/> 1–0</label><label class="option-label"><input type="radio" name="ex4-m5" value="c"/> 4–2</label><label class="option-label"><input type="radio" name="ex4-m5" value="d"/> 3–1</label></div><div class="feedback" id="fb-ex4-m5"></div></div>
+        <button class="check-btn" onclick="checkMCQ('ex4', {1:'b',2:'c',3:'c',4:'b',5:'d'})">✓ Check Answers</button>
+        <div class="score-display" id="score-ex4-mcq"></div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex4-fill">
+      <div class="questions-section"><h3><span class="q-icon">✏️</span> Fill in the Blanks</h3>
+        <div class="question-block"><div class="q-num">Q1</div><div class="q-text">President Trump welcomed the soccer team Inter Miami to the White __________ .</div><input class="fill-input" type="text" id="fi-ex4-1" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex4-1"></div></div>
+        <div class="question-block"><div class="q-num">Q2</div><div class="q-text">The team won the 2025 MLS __________ .</div><input class="fill-input" type="text" id="fi-ex4-2" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex4-2"></div></div>
+        <div class="question-block"><div class="q-num">Q3</div><div class="q-text">Messi gave Trump a __________ with the number 47.</div><input class="fill-input" type="text" id="fi-ex4-3" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex4-3"></div></div>
+        <div class="question-block"><div class="q-num">Q4</div><div class="q-text">Trump said his son __________ likes Messi and Ronaldo.</div><input class="fill-input" type="text" id="fi-ex4-4" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex4-4"></div></div>
+        <div class="question-block"><div class="q-num">Q5</div><div class="q-text">The team celebrated their championship __________ at the White House.</div><input class="fill-input" type="text" id="fi-ex4-5" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex4-5"></div></div>
+        <button class="check-btn" onclick="checkFill('ex4', ['house','cup','jersey','barron','victory'])">✓ Check Answers</button>
+        <div class="score-display" id="score-ex4-fill"></div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex4-vocab">
+      <div class="questions-section"><h3><span class="q-icon">📚</span> Vocabulary – Meaning Match</h3>
+        <div class="question-block"><div class="q-num">Q1</div><div class="q-text">What does <strong>"owner"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex4-v1" value="a"/> A player on the team</label><label class="vocab-option"><input type="radio" name="ex4-v1" value="b"/> A person who has or possesses something</label><label class="vocab-option"><input type="radio" name="ex4-v1" value="c"/> A sports journalist</label><label class="vocab-option"><input type="radio" name="ex4-v1" value="d"/> A government official</label></div><div class="feedback" id="vfb-ex4-1"></div></div>
+        <div class="question-block"><div class="q-num">Q2</div><div class="q-text">What does <strong>"jersey"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex4-v2" value="a"/> A pair of shorts</label><label class="vocab-option"><input type="radio" name="ex4-v2" value="b"/> A sports shirt worn by players</label><label class="vocab-option"><input type="radio" name="ex4-v2" value="c"/> A trophy</label><label class="vocab-option"><input type="radio" name="ex4-v2" value="d"/> A type of medal</label></div><div class="feedback" id="vfb-ex4-2"></div></div>
+        <div class="question-block"><div class="q-num">Q3</div><div class="q-text">What does <strong>"victory"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex4-v3" value="a"/> A defeat in a game</label><label class="vocab-option"><input type="radio" name="ex4-v3" value="b"/> A draw in a match</label><label class="vocab-option"><input type="radio" name="ex4-v3" value="c"/> Winning a competition or battle</label><label class="vocab-option"><input type="radio" name="ex4-v3" value="d"/> A practice session</label></div><div class="feedback" id="vfb-ex4-3"></div></div>
+        <div class="question-block"><div class="q-num">Q4</div><div class="q-text">What does <strong>"congratulate"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex4-v4" value="a"/> To criticise someone</label><label class="vocab-option"><input type="radio" name="ex4-v4" value="b"/> To express admiration for someone's success</label><label class="vocab-option"><input type="radio" name="ex4-v4" value="c"/> To invite someone to a party</label><label class="vocab-option"><input type="radio" name="ex4-v4" value="d"/> To challenge someone to a match</label></div><div class="feedback" id="vfb-ex4-4"></div></div>
+        <div class="question-block"><div class="q-num">Q5</div><div class="q-text">What does <strong>"championship"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex4-v5" value="a"/> A friendly match</label><label class="vocab-option"><input type="radio" name="ex4-v5" value="b"/> A tournament to decide the best team</label><label class="vocab-option"><input type="radio" name="ex4-v5" value="c"/> A training session</label><label class="vocab-option"><input type="radio" name="ex4-v5" value="d"/> A team meeting</label></div><div class="feedback" id="vfb-ex4-5"></div></div>
+        <button class="check-btn" onclick="checkVocab('ex4', {1:'b',2:'b',3:'c',4:'b',5:'b'})">✓ Check Answers</button>
+        <div class="score-display" id="score-ex4-vocab"></div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex4-write">
+      <div class="questions-section"><h3><span class="q-icon">🖊️</span> Writing Task</h3>
+        <div class="writing-prompt"><strong>Write a short paragraph (60–100 words):</strong><br/><br/>Sporting events often bring people together across political and cultural boundaries. Based on the story of Inter Miami's visit to the White House, write about why you think sports and politics sometimes mix, and whether you think this is a good or bad thing. Use specific details from the article.</div>
+        <textarea class="writing-area" id="write-ex4" placeholder="Write your paragraph here..." oninput="countWords(this,'wc-ex4')"></textarea>
+        <div class="word-count" id="wc-ex4">Words: 0</div>
+      <button class="writing-check-btn" id="check-btn-ex4" onclick="checkWriting('ex4')">
+        <div class="spinner"></div>
+        <span class="btn-text">✦ AI Feedback — Check My Writing</span>
+      </button>
+      <div class="ai-feedback-box" id="ai-fb-ex4">
+        <div class="ai-fb-header">
+          <span class="ai-icon">🤖</span>
+          <span class="ai-title">AI Writing Feedback</span>
+        </div>
+        <div class="ai-fb-body" id="ai-fb-body-ex4">Loading…</div>
+      </div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex4-gloss">
+      <div class="glossary-grid">
+        <div class="gloss-card"><div class="gloss-word">Owner</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Sahip, mal sahibi</div><div class="gloss-en">a person who possesses something</div></div>
+        <div class="gloss-card"><div class="gloss-word">Jersey</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Forma, spor gömleği</div><div class="gloss-en">a sports shirt worn by players</div></div>
+        <div class="gloss-card"><div class="gloss-word">Victory</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Zafer, galibiyet</div><div class="gloss-en">winning a competition or battle</div></div>
+        <div class="gloss-card"><div class="gloss-word">Championship</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Şampiyonluk</div><div class="gloss-en">a competition to find the best</div></div>
+        <div class="gloss-card"><div class="gloss-word">Congratulate</div><div class="gloss-pos">verb</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Tebrik etmek</div><div class="gloss-en">to praise someone for their success</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     EXERCISE 5 – Can Europe be without Visa and Mastercard?
+═══════════════════════════════════════════════════════ -->
+<div class="exercise" id="ex5">
+  <div class="exercise-header" onclick="toggleEx('ex5')">
+    <div class="ex-number">5</div>
+    <div class="ex-meta">
+      <div class="ex-level">Level 2 · Economy</div>
+      <div class="ex-title">Can Europe Be Without Visa and Mastercard?</div>
+    </div>
+    <div class="ex-chevron">▾</div>
+  </div>
+  <div class="exercise-body">
+    <div class="tabs-nav">
+      <button class="tab-btn active" onclick="openTab(this,'ex5-text')">📄 Text &amp; Audio</button>
+      <button class="tab-btn" onclick="openTab(this,'ex5-mcq')">🔵 Multiple Choice</button>
+      <button class="tab-btn" onclick="openTab(this,'ex5-fill')">✏️ Fill in the Blanks</button>
+      <button class="tab-btn" onclick="openTab(this,'ex5-vocab')">📚 Vocabulary</button>
+      <button class="tab-btn" onclick="openTab(this,'ex5-write')">🖊️ Writing</button>
+      <button class="tab-btn" onclick="openTab(this,'ex5-gloss')">📖 Glossary</button>
+    </div>
+    <div class="tab-content active" id="ex5-text">
+      <a class="article-link-btn" href="https://www.newsinlevels.com/products/can-europe-be-without-visa-and-mastercard-level-2/" target="_blank">🔗 Open Original Article</a>
+      <div class="article-text">
+        <p>Most people in Europe use Visa or Mastercard for card <strong>payments</strong>. These are American companies, and EU leaders think this creates a problem because Europe depends on <strong>foreign</strong> systems for payments. They want a new European system.</p>
+        <p>Wero is a digital wallet made by European banks. It uses <strong>direct</strong> bank transfer instead of a card network. This can lower fees and keep payment data in Europe. Many people in Germany, France, and Belgium already use it.</p>
+        <p>Leaders say Europe needs more control over the payment system. They also want lower costs for shops and customers. They believe the payment system is important infrastructure and Europe should manage it.</p>
+      </div>
+      <div class="sc-player-wrap">
+        <div class="sc-player-label">🎧 &nbsp;LISTEN NOW — Europe Without Visa &amp; Mastercard – Level 2</div>
+        <iframe scrolling="no" frameborder="no" allow="autoplay"
+          src="https://w.soundcloud.com/player/?url=https://soundcloud.com/newsinlevels/can-europe-be-without-visa-1&color=%23c8922a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"
+          height="80">
+        </iframe>
+      </div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex5-mcq">
+      <div class="questions-section"><h3><span class="q-icon">🔵</span> Multiple Choice Questions</h3>
+        <div class="question-block"><div class="q-num">Q1</div><div class="q-text">What is Wero?</div><div class="options"><label class="option-label"><input type="radio" name="ex5-m1" value="a"/> An American credit card</label><label class="option-label"><input type="radio" name="ex5-m1" value="b"/> A European digital wallet</label><label class="option-label"><input type="radio" name="ex5-m1" value="c"/> A new type of bank</label><label class="option-label"><input type="radio" name="ex5-m1" value="d"/> A government tax system</label></div><div class="feedback" id="fb-ex5-m1"></div></div>
+        <div class="question-block"><div class="q-num">Q2</div><div class="q-text">Why do EU leaders think Visa and Mastercard create a problem?</div><div class="options"><label class="option-label"><input type="radio" name="ex5-m2" value="a"/> They are too expensive for the EU budget</label><label class="option-label"><input type="radio" name="ex5-m2" value="b"/> Europe depends on foreign companies for payments</label><label class="option-label"><input type="radio" name="ex5-m2" value="c"/> They do not work in all EU countries</label><label class="option-label"><input type="radio" name="ex5-m2" value="d"/> Their technology is old</label></div><div class="feedback" id="fb-ex5-m2"></div></div>
+        <div class="question-block"><div class="q-num">Q3</div><div class="q-text">How does Wero transfer money?</div><div class="options"><label class="option-label"><input type="radio" name="ex5-m3" value="a"/> Through Visa's network</label><label class="option-label"><input type="radio" name="ex5-m3" value="b"/> Through a crypto system</label><label class="option-label"><input type="radio" name="ex5-m3" value="c"/> Through direct bank transfer</label><label class="option-label"><input type="radio" name="ex5-m3" value="d"/> Through government servers</label></div><div class="feedback" id="fb-ex5-m3"></div></div>
+        <div class="question-block"><div class="q-num">Q4</div><div class="q-text">Which countries already use Wero?</div><div class="options"><label class="option-label"><input type="radio" name="ex5-m4" value="a"/> Spain, Italy, Poland</label><label class="option-label"><input type="radio" name="ex5-m4" value="b"/> Germany, France, Belgium</label><label class="option-label"><input type="radio" name="ex5-m4" value="c"/> Sweden, Denmark, Norway</label><label class="option-label"><input type="radio" name="ex5-m4" value="d"/> Greece, Portugal, Ireland</label></div><div class="feedback" id="fb-ex5-m4"></div></div>
+        <div class="question-block"><div class="q-num">Q5</div><div class="q-text">What is the benefit of keeping payment data in Europe?</div><div class="options"><label class="option-label"><input type="radio" name="ex5-m5" value="a"/> It makes payments faster</label><label class="option-label"><input type="radio" name="ex5-m5" value="b"/> It gives Europe more control and reduces dependence on foreign companies</label><label class="option-label"><input type="radio" name="ex5-m5" value="c"/> It reduces the need for banks</label><label class="option-label"><input type="radio" name="ex5-m5" value="d"/> It allows free payments</label></div><div class="feedback" id="fb-ex5-m5"></div></div>
+        <button class="check-btn" onclick="checkMCQ('ex5', {1:'b',2:'b',3:'c',4:'b',5:'b'})">✓ Check Answers</button>
+        <div class="score-display" id="score-ex5-mcq"></div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex5-fill">
+      <div class="questions-section"><h3><span class="q-icon">✏️</span> Fill in the Blanks</h3>
+        <div class="question-block"><div class="q-num">Q1</div><div class="q-text">Most people in Europe use Visa or Mastercard for card __________ .</div><input class="fill-input" type="text" id="fi-ex5-1" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex5-1"></div></div>
+        <div class="question-block"><div class="q-num">Q2</div><div class="q-text">Wero is a digital __________ made by European banks.</div><input class="fill-input" type="text" id="fi-ex5-2" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex5-2"></div></div>
+        <div class="question-block"><div class="q-num">Q3</div><div class="q-text">Wero uses direct bank __________ instead of a card network.</div><input class="fill-input" type="text" id="fi-ex5-3" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex5-3"></div></div>
+        <div class="question-block"><div class="q-num">Q4</div><div class="q-text">Leaders say Europe needs more __________ over the payment system.</div><input class="fill-input" type="text" id="fi-ex5-4" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex5-4"></div></div>
+        <div class="question-block"><div class="q-num">Q5</div><div class="q-text">The payment system is important __________ for Europe.</div><input class="fill-input" type="text" id="fi-ex5-5" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex5-5"></div></div>
+        <button class="check-btn" onclick="checkFill('ex5', ['payments','wallet','transfer','control','infrastructure'])">✓ Check Answers</button>
+        <div class="score-display" id="score-ex5-fill"></div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex5-vocab">
+      <div class="questions-section"><h3><span class="q-icon">📚</span> Vocabulary – Meaning Match</h3>
+        <div class="question-block"><div class="q-num">Q1</div><div class="q-text">What does <strong>"payment"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex5-v1" value="a"/> Receiving a gift</label><label class="vocab-option"><input type="radio" name="ex5-v1" value="b"/> Giving money to buy something</label><label class="vocab-option"><input type="radio" name="ex5-v1" value="c"/> Borrowing from a bank</label><label class="vocab-option"><input type="radio" name="ex5-v1" value="d"/> Saving money</label></div><div class="feedback" id="vfb-ex5-1"></div></div>
+        <div class="question-block"><div class="q-num">Q2</div><div class="q-text">What does <strong>"foreign"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex5-v2" value="a"/> Belonging to your own country</label><label class="vocab-option"><input type="radio" name="ex5-v2" value="b"/> Coming from another country</label><label class="vocab-option"><input type="radio" name="ex5-v2" value="c"/> Very old</label><label class="vocab-option"><input type="radio" name="ex5-v2" value="d"/> Private and secret</label></div><div class="feedback" id="vfb-ex5-2"></div></div>
+        <div class="question-block"><div class="q-num">Q3</div><div class="q-text">What does <strong>"infrastructure"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex5-v3" value="a"/> A type of banking fee</label><label class="vocab-option"><input type="radio" name="ex5-v3" value="b"/> Basic systems that a society needs to function</label><label class="vocab-option"><input type="radio" name="ex5-v3" value="c"/> A building for government meetings</label><label class="vocab-option"><input type="radio" name="ex5-v3" value="d"/> A payment app</label></div><div class="feedback" id="vfb-ex5-3"></div></div>
+        <div class="question-block"><div class="q-num">Q4</div><div class="q-text">What does <strong>"fee"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex5-v4" value="a"/> A type of bank account</label><label class="vocab-option"><input type="radio" name="ex5-v4" value="b"/> Free access to a service</label><label class="vocab-option"><input type="radio" name="ex5-v4" value="c"/> A charge you pay for a service</label><label class="vocab-option"><input type="radio" name="ex5-v4" value="d"/> A government tax</label></div><div class="feedback" id="vfb-ex5-4"></div></div>
+        <div class="question-block"><div class="q-num">Q5</div><div class="q-text">What does <strong>"depend on"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex5-v5" value="a"/> To avoid using something</label><label class="vocab-option"><input type="radio" name="ex5-v5" value="b"/> To need something and rely on it</label><label class="vocab-option"><input type="radio" name="ex5-v5" value="c"/> To compete against something</label><label class="vocab-option"><input type="radio" name="ex5-v5" value="d"/> To create something new</label></div><div class="feedback" id="vfb-ex5-5"></div></div>
+        <button class="check-btn" onclick="checkVocab('ex5', {1:'b',2:'b',3:'b',4:'c',5:'b'})">✓ Check Answers</button>
+        <div class="score-display" id="score-ex5-vocab"></div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex5-write">
+      <div class="questions-section"><h3><span class="q-icon">🖊️</span> Writing Task</h3>
+        <div class="writing-prompt"><strong>Write a short paragraph (60–100 words):</strong><br/><br/>The article says that Europe depends on American companies for its payment systems and wants to change this. Do you think it is important for countries to control their own financial systems? What might happen if a country depends too much on foreign technology? Use ideas from the text to support your answer.</div>
+        <textarea class="writing-area" id="write-ex5" placeholder="Write your paragraph here..." oninput="countWords(this,'wc-ex5')"></textarea>
+        <div class="word-count" id="wc-ex5">Words: 0</div>
+      <button class="writing-check-btn" id="check-btn-ex5" onclick="checkWriting('ex5')">
+        <div class="spinner"></div>
+        <span class="btn-text">✦ AI Feedback — Check My Writing</span>
+      </button>
+      <div class="ai-feedback-box" id="ai-fb-ex5">
+        <div class="ai-fb-header">
+          <span class="ai-icon">🤖</span>
+          <span class="ai-title">AI Writing Feedback</span>
+        </div>
+        <div class="ai-fb-body" id="ai-fb-body-ex5">Loading…</div>
+      </div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex5-gloss">
+      <div class="glossary-grid">
+        <div class="gloss-card"><div class="gloss-word">Payment</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Ödeme</div><div class="gloss-en">giving money for goods or services</div></div>
+        <div class="gloss-card"><div class="gloss-word">Foreign</div><div class="gloss-pos">adjective</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Yabancı</div><div class="gloss-en">from another country</div></div>
+        <div class="gloss-card"><div class="gloss-word">Infrastructure</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Altyapı</div><div class="gloss-en">basic systems a society needs</div></div>
+        <div class="gloss-card"><div class="gloss-word">Fee</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Ücret, komisyon</div><div class="gloss-en">a charge for a service</div></div>
+        <div class="gloss-card"><div class="gloss-word">Transfer</div><div class="gloss-pos">noun / verb</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Transfer, havale</div><div class="gloss-en">moving money from one account to another</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     EXERCISE 6 – The Biggest Disney Cruise Ship
+═══════════════════════════════════════════════════════ -->
+<div class="exercise" id="ex6">
+  <div class="exercise-header" onclick="toggleEx('ex6')">
+    <div class="ex-number">6</div>
+    <div class="ex-meta">
+      <div class="ex-level">Level 2 · Interesting</div>
+      <div class="ex-title">The Biggest Disney Cruise Ship</div>
+    </div>
+    <div class="ex-chevron">▾</div>
+  </div>
+  <div class="exercise-body">
+    <div class="tabs-nav">
+      <button class="tab-btn active" onclick="openTab(this,'ex6-text')">📄 Text &amp; Audio</button>
+      <button class="tab-btn" onclick="openTab(this,'ex6-mcq')">🔵 Multiple Choice</button>
+      <button class="tab-btn" onclick="openTab(this,'ex6-fill')">✏️ Fill in the Blanks</button>
+      <button class="tab-btn" onclick="openTab(this,'ex6-vocab')">📚 Vocabulary</button>
+      <button class="tab-btn" onclick="openTab(this,'ex6-write')">🖊️ Writing</button>
+      <button class="tab-btn" onclick="openTab(this,'ex6-gloss')">📖 Glossary</button>
+    </div>
+    <div class="tab-content active" id="ex6-text">
+      <a class="article-link-btn" href="https://www.newsinlevels.com/products/the-biggest-disney-cruise-ship-level-2/" target="_blank">🔗 Open Original Article</a>
+      <div class="article-text">
+        <p>Disney will start a new and very big <strong>cruise ship</strong> called Disney Adventure. The ship will carry 6,700 <strong>passengers</strong> and will leave from Singapore. People can take short trips for three or four nights.</p>
+        <p>Disney wants to grow its cruise business in Asia because fewer tourists now travel to the United States. Because of this, Disney looks for a new <strong>market</strong> in Asia. The company already has theme parks there, but it doesn't have a cruise ship in this part of the world. Leaders think many families there want this kind of holiday.</p>
+        <p>The ship has fun areas from popular Disney stories like Marvel and Frozen. Families can spend time together on the ship. Disney also plans to build five more ships in the future.</p>
+      </div>
+      <div class="sc-player-wrap">
+        <div class="sc-player-label">🎧 &nbsp;LISTEN NOW — The Biggest Disney Cruise Ship – Level 2</div>
+        <iframe scrolling="no" frameborder="no" allow="autoplay"
+          src="https://w.soundcloud.com/player/?url=https://soundcloud.com/newsinlevels/the-biggest-disney-cruise-1&color=%23c8922a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"
+          height="80">
+        </iframe>
+      </div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex6-mcq">
+      <div class="questions-section"><h3><span class="q-icon">🔵</span> Multiple Choice Questions</h3>
+        <div class="question-block"><div class="q-num">Q1</div><div class="q-text">What is the name of Disney's new cruise ship?</div><div class="options"><label class="option-label"><input type="radio" name="ex6-m1" value="a"/> Disney Explorer</label><label class="option-label"><input type="radio" name="ex6-m1" value="b"/> Disney Voyager</label><label class="option-label"><input type="radio" name="ex6-m1" value="c"/> Disney Adventure</label><label class="option-label"><input type="radio" name="ex6-m1" value="d"/> Disney Dream</label></div><div class="feedback" id="fb-ex6-m1"></div></div>
+        <div class="question-block"><div class="q-num">Q2</div><div class="q-text">From which city will the ship leave?</div><div class="options"><label class="option-label"><input type="radio" name="ex6-m2" value="a"/> Tokyo</label><label class="option-label"><input type="radio" name="ex6-m2" value="b"/> Shanghai</label><label class="option-label"><input type="radio" name="ex6-m2" value="c"/> Hong Kong</label><label class="option-label"><input type="radio" name="ex6-m2" value="d"/> Singapore</label></div><div class="feedback" id="fb-ex6-m2"></div></div>
+        <div class="question-block"><div class="q-num">Q3</div><div class="q-text">Why is Disney expanding to Asia?</div><div class="options"><label class="option-label"><input type="radio" name="ex6-m3" value="a"/> Asia has warmer weather</label><label class="option-label"><input type="radio" name="ex6-m3" value="b"/> Fewer tourists travel to the US now</label><label class="option-label"><input type="radio" name="ex6-m3" value="c"/> Asian families prefer ships to planes</label><label class="option-label"><input type="radio" name="ex6-m3" value="d"/> Disney has no theme parks in Asia</label></div><div class="feedback" id="fb-ex6-m3"></div></div>
+        <div class="question-block"><div class="q-num">Q4</div><div class="q-text">How many passengers can the ship carry?</div><div class="options"><label class="option-label"><input type="radio" name="ex6-m4" value="a"/> 3,500</label><label class="option-label"><input type="radio" name="ex6-m4" value="b"/> 5,000</label><label class="option-label"><input type="radio" name="ex6-m4" value="c"/> 6,700</label><label class="option-label"><input type="radio" name="ex6-m4" value="d"/> 8,200</label></div><div class="feedback" id="fb-ex6-m4"></div></div>
+        <div class="question-block"><div class="q-num">Q5</div><div class="q-text">How many more ships does Disney plan to build?</div><div class="options"><label class="option-label"><input type="radio" name="ex6-m5" value="a"/> Two</label><label class="option-label"><input type="radio" name="ex6-m5" value="b"/> Three</label><label class="option-label"><input type="radio" name="ex6-m5" value="c"/> Ten</label><label class="option-label"><input type="radio" name="ex6-m5" value="d"/> Five</label></div><div class="feedback" id="fb-ex6-m5"></div></div>
+        <button class="check-btn" onclick="checkMCQ('ex6', {1:'c',2:'d',3:'b',4:'c',5:'d'})">✓ Check Answers</button>
+        <div class="score-display" id="score-ex6-mcq"></div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex6-fill">
+      <div class="questions-section"><h3><span class="q-icon">✏️</span> Fill in the Blanks</h3>
+        <div class="question-block"><div class="q-num">Q1</div><div class="q-text">Disney will start a new cruise ship called Disney __________ .</div><input class="fill-input" type="text" id="fi-ex6-1" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex6-1"></div></div>
+        <div class="question-block"><div class="q-num">Q2</div><div class="q-text">The ship will carry 6,700 __________ .</div><input class="fill-input" type="text" id="fi-ex6-2" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex6-2"></div></div>
+        <div class="question-block"><div class="q-num">Q3</div><div class="q-text">The ship will leave from __________ .</div><input class="fill-input" type="text" id="fi-ex6-3" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex6-3"></div></div>
+        <div class="question-block"><div class="q-num">Q4</div><div class="q-text">The ship has fun areas from Disney stories like Marvel and __________ .</div><input class="fill-input" type="text" id="fi-ex6-4" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex6-4"></div></div>
+        <div class="question-block"><div class="q-num">Q5</div><div class="q-text">Disney plans to build five more __________ in the future.</div><input class="fill-input" type="text" id="fi-ex6-5" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex6-5"></div></div>
+        <button class="check-btn" onclick="checkFill('ex6', ['adventure','passengers','singapore','frozen','ships'])">✓ Check Answers</button>
+        <div class="score-display" id="score-ex6-fill"></div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex6-vocab">
+      <div class="questions-section"><h3><span class="q-icon">📚</span> Vocabulary – Meaning Match</h3>
+        <div class="question-block"><div class="q-num">Q1</div><div class="q-text">What does <strong>"cruise ship"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex6-v1" value="a"/> A small fishing boat</label><label class="vocab-option"><input type="radio" name="ex6-v1" value="b"/> A large ship for leisure travel where people sleep on board</label><label class="vocab-option"><input type="radio" name="ex6-v1" value="c"/> A military vessel</label><label class="vocab-option"><input type="radio" name="ex6-v1" value="d"/> A cargo ship for goods</label></div><div class="feedback" id="vfb-ex6-1"></div></div>
+        <div class="question-block"><div class="q-num">Q2</div><div class="q-text">What does <strong>"passenger"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex6-v2" value="a"/> The captain of a ship</label><label class="vocab-option"><input type="radio" name="ex6-v2" value="b"/> A crew member</label><label class="vocab-option"><input type="radio" name="ex6-v2" value="c"/> A person who travels on transport as a non-driver</label><label class="vocab-option"><input type="radio" name="ex6-v2" value="d"/> A port worker</label></div><div class="feedback" id="vfb-ex6-2"></div></div>
+        <div class="question-block"><div class="q-num">Q3</div><div class="q-text">What does <strong>"market"</strong> mean in this context?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex6-v3" value="a"/> A local food market</label><label class="vocab-option"><input type="radio" name="ex6-v3" value="b"/> A group of potential customers in a region</label><label class="vocab-option"><input type="radio" name="ex6-v3" value="c"/> A stock exchange</label><label class="vocab-option"><input type="radio" name="ex6-v3" value="d"/> A shopping centre</label></div><div class="feedback" id="vfb-ex6-3"></div></div>
+        <div class="question-block"><div class="q-num">Q4</div><div class="q-text">What does <strong>"expand"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex6-v4" value="a"/> To reduce in size</label><label class="vocab-option"><input type="radio" name="ex6-v4" value="b"/> To grow or increase in size or reach</label><label class="vocab-option"><input type="radio" name="ex6-v4" value="c"/> To close a business</label><label class="vocab-option"><input type="radio" name="ex6-v4" value="d"/> To compete in a race</label></div><div class="feedback" id="vfb-ex6-4"></div></div>
+        <div class="question-block"><div class="q-num">Q5</div><div class="q-text">What does <strong>"theme park"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex6-v5" value="a"/> A nature park with animals</label><label class="vocab-option"><input type="radio" name="ex6-v5" value="b"/> An amusement park built around a central concept or story</label><label class="vocab-option"><input type="radio" name="ex6-v5" value="c"/> A public garden</label><label class="vocab-option"><input type="radio" name="ex6-v5" value="d"/> An outdoor cinema</label></div><div class="feedback" id="vfb-ex6-5"></div></div>
+        <button class="check-btn" onclick="checkVocab('ex6', {1:'b',2:'c',3:'b',4:'b',5:'b'})">✓ Check Answers</button>
+        <div class="score-display" id="score-ex6-vocab"></div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex6-write">
+      <div class="questions-section"><h3><span class="q-icon">🖊️</span> Writing Task</h3>
+        <div class="writing-prompt"><strong>Write a short paragraph (60–100 words):</strong><br/><br/>Disney is expanding into Asia with a new cruise ship because fewer tourists are travelling to the United States. Think about why tourism patterns change over time. What factors might make tourists choose one destination over another? Use ideas from the article and your own experience to write your response.</div>
+        <textarea class="writing-area" id="write-ex6" placeholder="Write your paragraph here..." oninput="countWords(this,'wc-ex6')"></textarea>
+        <div class="word-count" id="wc-ex6">Words: 0</div>
+      <button class="writing-check-btn" id="check-btn-ex6" onclick="checkWriting('ex6')">
+        <div class="spinner"></div>
+        <span class="btn-text">✦ AI Feedback — Check My Writing</span>
+      </button>
+      <div class="ai-feedback-box" id="ai-fb-ex6">
+        <div class="ai-fb-header">
+          <span class="ai-icon">🤖</span>
+          <span class="ai-title">AI Writing Feedback</span>
+        </div>
+        <div class="ai-fb-body" id="ai-fb-body-ex6">Loading…</div>
+      </div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex6-gloss">
+      <div class="glossary-grid">
+        <div class="gloss-card"><div class="gloss-word">Cruise ship</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Gemi turu, kruvaziyer</div><div class="gloss-en">a large ship for leisure travel</div></div>
+        <div class="gloss-card"><div class="gloss-word">Passenger</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Yolcu</div><div class="gloss-en">a traveller on transport</div></div>
+        <div class="gloss-card"><div class="gloss-word">Market</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Pazar, piyasa</div><div class="gloss-en">a group of customers or a region for business</div></div>
+        <div class="gloss-card"><div class="gloss-word">Expand</div><div class="gloss-pos">verb</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Genişlemek, büyümek</div><div class="gloss-en">to grow in size or reach</div></div>
+        <div class="gloss-card"><div class="gloss-word">Theme park</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Tema parkı</div><div class="gloss-en">an amusement park built around a theme</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     EXERCISE 7 – Humans Come from Stars
+═══════════════════════════════════════════════════════ -->
+<div class="exercise" id="ex7">
+  <div class="exercise-header" onclick="toggleEx('ex7')">
+    <div class="ex-number">7</div>
+    <div class="ex-meta">
+      <div class="ex-level">Level 2 · Science</div>
+      <div class="ex-title">Humans Come from Stars</div>
+    </div>
+    <div class="ex-chevron">▾</div>
+  </div>
+  <div class="exercise-body">
+    <div class="tabs-nav">
+      <button class="tab-btn active" onclick="openTab(this,'ex7-text')">📄 Text &amp; Audio</button>
+      <button class="tab-btn" onclick="openTab(this,'ex7-mcq')">🔵 Multiple Choice</button>
+      <button class="tab-btn" onclick="openTab(this,'ex7-fill')">✏️ Fill in the Blanks</button>
+      <button class="tab-btn" onclick="openTab(this,'ex7-vocab')">📚 Vocabulary</button>
+      <button class="tab-btn" onclick="openTab(this,'ex7-write')">🖊️ Writing</button>
+      <button class="tab-btn" onclick="openTab(this,'ex7-gloss')">📖 Glossary</button>
+    </div>
+    <div class="tab-content active" id="ex7-text">
+      <a class="article-link-btn" href="https://www.newsinlevels.com/products/humans-come-from-stars-level-2/" target="_blank">🔗 Open Original Article</a>
+      <div class="article-text">
+        <p>Stars are born inside very cold clouds of gas and dust called molecular clouds. These clouds are very big and heavy. Small parts inside the clouds come together and grow bigger.</p>
+        <p>When they get heavy enough, they fall in on themselves and form baby stars called protostars. After some time, the inside gets hot, and a process called fusion starts. Fusion changes hydrogen into helium and gives the star energy. When a star uses all its hydrogen, it will become a <strong>white dwarf</strong> or a supernova. The star's materials help to make new stars in the future.</p>
+        <p>Old stars made the things in our bodies, like carbon and oxygen. These stars lived a long time before the Earth, the Sun, or our galaxy. When the stars <strong>exploded</strong>, they sent their <strong>elements</strong> across space. Later, these materials came together to make planets, stars, and people. Carl Sagan, a famous scientist, said that the universe is inside us and that we are made of star stuff. This means we are all connected to the stars in a very special way.</p>
+      </div>
+      <div class="sc-player-wrap">
+        <div class="sc-player-label">🎧 &nbsp;LISTEN NOW — Humans Come from Stars – Level 2</div>
+        <iframe scrolling="no" frameborder="no" allow="autoplay"
+          src="https://w.soundcloud.com/player/?url=https://soundcloud.com/newsinlevels/humans-come-from-stars-level-2&color=%23c8922a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"
+          height="80">
+        </iframe>
+      </div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex7-mcq">
+      <div class="questions-section"><h3><span class="q-icon">🔵</span> Multiple Choice Questions</h3>
+        <div class="question-block"><div class="q-num">Q1</div><div class="q-text">What are molecular clouds made of?</div><div class="options"><label class="option-label"><input type="radio" name="ex7-m1" value="a"/> Water and ice</label><label class="option-label"><input type="radio" name="ex7-m1" value="b"/> Gas and dust</label><label class="option-label"><input type="radio" name="ex7-m1" value="c"/> Hydrogen and oxygen only</label><label class="option-label"><input type="radio" name="ex7-m1" value="d"/> Rock and metal</label></div><div class="feedback" id="fb-ex7-m1"></div></div>
+        <div class="question-block"><div class="q-num">Q2</div><div class="q-text">What does fusion do?</div><div class="options"><label class="option-label"><input type="radio" name="ex7-m2" value="a"/> It cools a star down</label><label class="option-label"><input type="radio" name="ex7-m2" value="b"/> It changes hydrogen into helium and gives energy</label><label class="option-label"><input type="radio" name="ex7-m2" value="c"/> It creates new planets</label><label class="option-label"><input type="radio" name="ex7-m2" value="d"/> It destroys molecules</label></div><div class="feedback" id="fb-ex7-m2"></div></div>
+        <div class="question-block"><div class="q-num">Q3</div><div class="q-text">What does Carl Sagan say about humans and stars?</div><div class="options"><label class="option-label"><input type="radio" name="ex7-m3" value="a"/> We live near stars</label><label class="option-label"><input type="radio" name="ex7-m3" value="b"/> We are afraid of stars</label><label class="option-label"><input type="radio" name="ex7-m3" value="c"/> We are made of star stuff</label><label class="option-label"><input type="radio" name="ex7-m3" value="d"/> We will one day become stars</label></div><div class="feedback" id="fb-ex7-m3"></div></div>
+        <div class="question-block"><div class="q-num">Q4</div><div class="q-text">What is a protostar?</div><div class="options"><label class="option-label"><input type="radio" name="ex7-m4" value="a"/> A dying star</label><div class="options"></div><label class="option-label"><input type="radio" name="ex7-m4" value="b"/> A planet forming around a star</label><label class="option-label"><input type="radio" name="ex7-m4" value="c"/> A baby star forming inside a molecular cloud</label><label class="option-label"><input type="radio" name="ex7-m4" value="d"/> An exploded star</label></div><div class="feedback" id="fb-ex7-m4"></div></div>
+        <div class="question-block"><div class="q-num">Q5</div><div class="q-text">Which elements in our bodies came from old stars?</div><div class="options"><label class="option-label"><input type="radio" name="ex7-m5" value="a"/> Gold and silver</label><label class="option-label"><input type="radio" name="ex7-m5" value="b"/> Carbon and oxygen</label><label class="option-label"><input type="radio" name="ex7-m5" value="c"/> Iron and calcium only</label><label class="option-label"><input type="radio" name="ex7-m5" value="d"/> Nitrogen and helium</label></div><div class="feedback" id="fb-ex7-m5"></div></div>
+        <button class="check-btn" onclick="checkMCQ('ex7', {1:'b',2:'b',3:'c',4:'c',5:'b'})">✓ Check Answers</button>
+        <div class="score-display" id="score-ex7-mcq"></div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex7-fill">
+      <div class="questions-section"><h3><span class="q-icon">✏️</span> Fill in the Blanks</h3>
+        <div class="question-block"><div class="q-num">Q1</div><div class="q-text">Stars are born inside cold clouds called molecular __________ .</div><input class="fill-input" type="text" id="fi-ex7-1" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex7-1"></div></div>
+        <div class="question-block"><div class="q-num">Q2</div><div class="q-text">Fusion changes __________ into helium.</div><input class="fill-input" type="text" id="fi-ex7-2" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex7-2"></div></div>
+        <div class="question-block"><div class="q-num">Q3</div><div class="q-text">When stars explode, they send their __________ across space.</div><input class="fill-input" type="text" id="fi-ex7-3" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex7-3"></div></div>
+        <div class="question-block"><div class="q-num">Q4</div><div class="q-text">Old stars made carbon and __________ which are found in our bodies.</div><input class="fill-input" type="text" id="fi-ex7-4" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex7-4"></div></div>
+        <div class="question-block"><div class="q-num">Q5</div><div class="q-text">Carl Sagan said we are made of __________ stuff.</div><input class="fill-input" type="text" id="fi-ex7-5" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex7-5"></div></div>
+        <button class="check-btn" onclick="checkFill('ex7', ['clouds','hydrogen','elements','oxygen','star'])">✓ Check Answers</button>
+        <div class="score-display" id="score-ex7-fill"></div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex7-vocab">
+      <div class="questions-section"><h3><span class="q-icon">📚</span> Vocabulary – Meaning Match</h3>
+        <div class="question-block"><div class="q-num">Q1</div><div class="q-text">What does <strong>"element"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex7-v1" value="a"/> A type of weather</label><label class="vocab-option"><input type="radio" name="ex7-v1" value="b"/> A basic substance that cannot be broken into simpler ones</label><label class="vocab-option"><input type="radio" name="ex7-v1" value="c"/> A part of a building</label><label class="vocab-option"><input type="radio" name="ex7-v1" value="d"/> A piece of equipment</label></div><div class="feedback" id="vfb-ex7-1"></div></div>
+        <div class="question-block"><div class="q-num">Q2</div><div class="q-text">What does <strong>"fusion"</strong> mean in science?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex7-v2" value="a"/> A chemical explosion</label><label class="vocab-option"><input type="radio" name="ex7-v2" value="b"/> The separation of atoms</label><label class="vocab-option"><input type="radio" name="ex7-v2" value="c"/> The joining of atomic nuclei to release energy</label><label class="vocab-option"><input type="radio" name="ex7-v2" value="d"/> The cooling of a star</label></div><div class="feedback" id="vfb-ex7-2"></div></div>
+        <div class="question-block"><div class="q-num">Q3</div><div class="q-text">What does <strong>"supernova"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex7-v3" value="a"/> A new star being born</label><label class="vocab-option"><input type="radio" name="ex7-v3" value="b"/> A planet orbiting a star</label><label class="vocab-option"><input type="radio" name="ex7-v3" value="c"/> A powerful explosion at the end of a star's life</label><label class="vocab-option"><input type="radio" name="ex7-v3" value="d"/> A type of galaxy</label></div><div class="feedback" id="vfb-ex7-3"></div></div>
+        <div class="question-block"><div class="q-num">Q4</div><div class="q-text">What does <strong>"galaxy"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex7-v4" value="a"/> A single star</label><label class="vocab-option"><input type="radio" name="ex7-v4" value="b"/> The atmosphere of a planet</label><label class="vocab-option"><input type="radio" name="ex7-v4" value="c"/> A large system of millions of stars</label><label class="vocab-option"><input type="radio" name="ex7-v4" value="d"/> A moon orbiting a planet</label></div><div class="feedback" id="vfb-ex7-4"></div></div>
+        <div class="question-block"><div class="q-num">Q5</div><div class="q-text">What does <strong>"explode"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex7-v5" value="a"/> To melt slowly</label><label class="vocab-option"><input type="radio" name="ex7-v5" value="b"/> To burst suddenly with great force</label><label class="vocab-option"><input type="radio" name="ex7-v5" value="c"/> To grow very large over time</label><label class="vocab-option"><input type="radio" name="ex7-v5" value="d"/> To spin rapidly</label></div><div class="feedback" id="vfb-ex7-5"></div></div>
+        <button class="check-btn" onclick="checkVocab('ex7', {1:'b',2:'c',3:'c',4:'c',5:'b'})">✓ Check Answers</button>
+        <div class="score-display" id="score-ex7-vocab"></div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex7-write">
+      <div class="questions-section"><h3><span class="q-icon">🖊️</span> Writing Task</h3>
+        <div class="writing-prompt"><strong>Write a short paragraph (60–100 words):</strong><br/><br/>Carl Sagan famously said we are "made of star stuff." After reading this article about how stars form and eventually explode, spreading their elements across the universe, do you find this idea inspiring or surprising? Why? Describe what this idea means to you and how it changes the way you think about human beings and the universe.</div>
+        <textarea class="writing-area" id="write-ex7" placeholder="Write your paragraph here..." oninput="countWords(this,'wc-ex7')"></textarea>
+        <div class="word-count" id="wc-ex7">Words: 0</div>
+      <button class="writing-check-btn" id="check-btn-ex7" onclick="checkWriting('ex7')">
+        <div class="spinner"></div>
+        <span class="btn-text">✦ AI Feedback — Check My Writing</span>
+      </button>
+      <div class="ai-feedback-box" id="ai-fb-ex7">
+        <div class="ai-fb-header">
+          <span class="ai-icon">🤖</span>
+          <span class="ai-title">AI Writing Feedback</span>
+        </div>
+        <div class="ai-fb-body" id="ai-fb-body-ex7">Loading…</div>
+      </div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex7-gloss">
+      <div class="glossary-grid">
+        <div class="gloss-card"><div class="gloss-word">Element</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Element, kimyasal madde</div><div class="gloss-en">a basic chemical substance</div></div>
+        <div class="gloss-card"><div class="gloss-word">Fusion</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Füzyon, birleşim</div><div class="gloss-en">joining of atoms to release energy</div></div>
+        <div class="gloss-card"><div class="gloss-word">Supernova</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Süpernova</div><div class="gloss-en">a massive stellar explosion</div></div>
+        <div class="gloss-card"><div class="gloss-word">Galaxy</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Galaksi</div><div class="gloss-en">a large system of billions of stars</div></div>
+        <div class="gloss-card"><div class="gloss-word">Hydrogen</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Hidrojen</div><div class="gloss-en">the lightest and most common element</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     EXERCISE 8 – The US and Israel Attack Iran
+═══════════════════════════════════════════════════════ -->
+<div class="exercise" id="ex8">
+  <div class="exercise-header" onclick="toggleEx('ex8')">
+    <div class="ex-number">8</div>
+    <div class="ex-meta">
+      <div class="ex-level">Level 2 · News</div>
+      <div class="ex-title">The US and Israel Attack Iran</div>
+    </div>
+    <div class="ex-chevron">▾</div>
+  </div>
+  <div class="exercise-body">
+    <div class="tabs-nav">
+      <button class="tab-btn active" onclick="openTab(this,'ex8-text')">📄 Text &amp; Audio</button>
+      <button class="tab-btn" onclick="openTab(this,'ex8-mcq')">🔵 Multiple Choice</button>
+      <button class="tab-btn" onclick="openTab(this,'ex8-fill')">✏️ Fill in the Blanks</button>
+      <button class="tab-btn" onclick="openTab(this,'ex8-vocab')">📚 Vocabulary</button>
+      <button class="tab-btn" onclick="openTab(this,'ex8-write')">🖊️ Writing</button>
+      <button class="tab-btn" onclick="openTab(this,'ex8-gloss')">📖 Glossary</button>
+    </div>
+    <div class="tab-content active" id="ex8-text">
+      <a class="article-link-btn" href="https://www.newsinlevels.com/products/the-us-and-israel-attack-iran-level-2/" target="_blank">🔗 Open Original Article</a>
+      <div class="article-text">
+        <p>The US and Israel attacked Iran. President Trump said he wanted to stop Iran from becoming a nuclear power and to protect Americans.</p>
+        <p>Iran responded by firing rockets at US military bases in Bahrain and other countries in the region. The countries stopped many rockets in the air, but some hit the ground, killed people and destroyed buildings. Israel declared a <strong>state of emergency</strong> and closed its <strong>airspace</strong>. There were explosions in Iranian cities.</p>
+        <p>Iran's Supreme Leader Ayatollah Ali Khamenei died during the attacks. He led Iran since 1989. The situation follows weeks of protests and talks about Iran's nuclear programme. Many people worry the <strong>conflict</strong> could grow larger.</p>
+      </div>
+      <div class="sc-player-wrap">
+        <div class="sc-player-label">🎧 &nbsp;LISTEN NOW — The US and Israel Attack Iran – Level 2</div>
+        <iframe scrolling="no" frameborder="no" allow="autoplay"
+          src="https://w.soundcloud.com/player/?url=https://soundcloud.com/newsinlevels/the-us-and-israel-attack-1&color=%23c8922a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"
+          height="80">
+        </iframe>
+      </div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex8-mcq">
+      <div class="questions-section"><h3><span class="q-icon">🔵</span> Multiple Choice Questions</h3>
+        <div class="question-block"><div class="q-num">Q1</div><div class="q-text">Why did Trump say the US attacked Iran?</div><div class="options"><label class="option-label"><input type="radio" name="ex8-m1" value="a"/> To take Iran's oil</label><label class="option-label"><input type="radio" name="ex8-m1" value="b"/> To stop Iran from becoming a nuclear power and to protect Americans</label><label class="option-label"><input type="radio" name="ex8-m1" value="c"/> To help Israel with trade</label><label class="option-label"><input type="radio" name="ex8-m1" value="d"/> To stop Iranian immigration</label></div><div class="feedback" id="fb-ex8-m1"></div></div>
+        <div class="question-block"><div class="q-num">Q2</div><div class="q-text">Where did Iran fire rockets?</div><div class="options"><label class="option-label"><input type="radio" name="ex8-m2" value="a"/> At European countries</label><label class="option-label"><input type="radio" name="ex8-m2" value="b"/> At US military bases in Bahrain and the region</label><label class="option-label"><input type="radio" name="ex8-m2" value="c"/> At naval ships in the Mediterranean</label><label class="option-label"><input type="radio" name="ex8-m2" value="d"/> At Russian territory</label></div><div class="feedback" id="fb-ex8-m2"></div></div>
+        <div class="question-block"><div class="q-num">Q3</div><div class="q-text">What happened to Iran's Supreme Leader?</div><div class="options"><label class="option-label"><input type="radio" name="ex8-m3" value="a"/> He escaped the country</label><label class="option-label"><input type="radio" name="ex8-m3" value="b"/> He resigned from power</label><label class="option-label"><input type="radio" name="ex8-m3" value="c"/> He died during the attacks</label><label class="option-label"><input type="radio" name="ex8-m3" value="d"/> He was captured</label></div><div class="feedback" id="fb-ex8-m3"></div></div>
+        <div class="question-block"><div class="q-num">Q4</div><div class="q-text">What did Israel do after the attack?</div><div class="options"><label class="option-label"><input type="radio" name="ex8-m4" value="a"/> It sent troops to Iran</label><label class="option-label"><input type="radio" name="ex8-m4" value="b"/> It declared a state of emergency and closed its airspace</label><label class="option-label"><input type="radio" name="ex8-m4" value="c"/> It called for peace talks</label><label class="option-label"><input type="radio" name="ex8-m4" value="d"/> It launched missiles at Bahrain</label></div><div class="feedback" id="fb-ex8-m4"></div></div>
+        <div class="question-block"><div class="q-num">Q5</div><div class="q-text">How long had Khamenei led Iran?</div><div class="options"><label class="option-label"><input type="radio" name="ex8-m5" value="a"/> Since 1975</label><label class="option-label"><input type="radio" name="ex8-m5" value="b"/> Since 2000</label><label class="option-label"><input type="radio" name="ex8-m5" value="c"/> Since 1989</label><label class="option-label"><input type="radio" name="ex8-m5" value="d"/> Since 1979</label></div><div class="feedback" id="fb-ex8-m5"></div></div>
+        <button class="check-btn" onclick="checkMCQ('ex8', {1:'b',2:'b',3:'c',4:'b',5:'c'})">✓ Check Answers</button>
+        <div class="score-display" id="score-ex8-mcq"></div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex8-fill">
+      <div class="questions-section"><h3><span class="q-icon">✏️</span> Fill in the Blanks</h3>
+        <div class="question-block"><div class="q-num">Q1</div><div class="q-text">Trump said he wanted to stop Iran from becoming a nuclear __________ .</div><input class="fill-input" type="text" id="fi-ex8-1" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex8-1"></div></div>
+        <div class="question-block"><div class="q-num">Q2</div><div class="q-text">Iran responded by firing __________ at US military bases.</div><input class="fill-input" type="text" id="fi-ex8-2" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex8-2"></div></div>
+        <div class="question-block"><div class="q-num">Q3</div><div class="q-text">Israel declared a state of __________ .</div><input class="fill-input" type="text" id="fi-ex8-3" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex8-3"></div></div>
+        <div class="question-block"><div class="q-num">Q4</div><div class="q-text">Iran's Supreme Leader Khamenei __________ during the attacks.</div><input class="fill-input" type="text" id="fi-ex8-4" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex8-4"></div></div>
+        <div class="question-block"><div class="q-num">Q5</div><div class="q-text">Many people worry the __________ could grow larger.</div><input class="fill-input" type="text" id="fi-ex8-5" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex8-5"></div></div>
+        <button class="check-btn" onclick="checkFill('ex8', ['power','rockets','emergency','died','conflict'])">✓ Check Answers</button>
+        <div class="score-display" id="score-ex8-fill"></div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex8-vocab">
+      <div class="questions-section"><h3><span class="q-icon">📚</span> Vocabulary – Meaning Match</h3>
+        <div class="question-block"><div class="q-num">Q1</div><div class="q-text">What does <strong>"state of emergency"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex8-v1" value="a"/> A time of celebration</label><label class="vocab-option"><input type="radio" name="ex8-v1" value="b"/> A special situation when a government takes extra powers due to danger</label><label class="vocab-option"><input type="radio" name="ex8-v1" value="c"/> A type of military attack</label><label class="vocab-option"><input type="radio" name="ex8-v1" value="d"/> A peace agreement</label></div><div class="feedback" id="vfb-ex8-1"></div></div>
+        <div class="question-block"><div class="q-num">Q2</div><div class="q-text">What does <strong>"airspace"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex8-v2" value="a"/> An airport terminal</label><label class="vocab-option"><input type="radio" name="ex8-v2" value="b"/> The sky above a country controlled by its government</label><label class="vocab-option"><input type="radio" name="ex8-v2" value="c"/> A military base</label><label class="vocab-option"><input type="radio" name="ex8-v2" value="d"/> An air conditioning system</label></div><div class="feedback" id="vfb-ex8-2"></div></div>
+        <div class="question-block"><div class="q-num">Q3</div><div class="q-text">What does <strong>"conflict"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex8-v3" value="a"/> A peaceful negotiation</label><label class="vocab-option"><input type="radio" name="ex8-v3" value="b"/> A trade agreement</label><label class="vocab-option"><input type="radio" name="ex8-v3" value="c"/> A serious disagreement or fighting between groups</label><label class="vocab-option"><input type="radio" name="ex8-v3" value="d"/> A natural disaster</label></div><div class="feedback" id="vfb-ex8-3"></div></div>
+        <div class="question-block"><div class="q-num">Q4</div><div class="q-text">What does <strong>"nuclear"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex8-v4" value="a"/> Related to the sun's light</label><label class="vocab-option"><input type="radio" name="ex8-v4" value="b"/> Related to energy from atoms, used in weapons or power plants</label><label class="vocab-option"><input type="radio" name="ex8-v4" value="c"/> Related to ocean warfare</label><label class="vocab-option"><input type="radio" name="ex8-v4" value="d"/> Related to space exploration</label></div><div class="feedback" id="vfb-ex8-4"></div></div>
+        <div class="question-block"><div class="q-num">Q5</div><div class="q-text">What does <strong>"respond"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex8-v5" value="a"/> To start an attack first</label><label class="vocab-option"><input type="radio" name="ex8-v5" value="b"/> To react to something that has happened</label><label class="vocab-option"><input type="radio" name="ex8-v5" value="c"/> To surrender to an enemy</label><label class="vocab-option"><input type="radio" name="ex8-v5" value="d"/> To negotiate a peace deal</label></div><div class="feedback" id="vfb-ex8-5"></div></div>
+        <button class="check-btn" onclick="checkVocab('ex8', {1:'b',2:'b',3:'c',4:'b',5:'b'})">✓ Check Answers</button>
+        <div class="score-display" id="score-ex8-vocab"></div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex8-write">
+      <div class="questions-section"><h3><span class="q-icon">🖊️</span> Writing Task</h3>
+        <div class="writing-prompt"><strong>Write a short paragraph (60–100 words):</strong><br/><br/>The article describes a military conflict between the US and Israel against Iran. International conflicts can have very serious consequences for people in the region and around the world. Based on the events described in this text, write about what you think the international community should do when a conflict like this begins. Use facts from the article to support your ideas.</div>
+        <textarea class="writing-area" id="write-ex8" placeholder="Write your paragraph here..." oninput="countWords(this,'wc-ex8')"></textarea>
+        <div class="word-count" id="wc-ex8">Words: 0</div>
+      <button class="writing-check-btn" id="check-btn-ex8" onclick="checkWriting('ex8')">
+        <div class="spinner"></div>
+        <span class="btn-text">✦ AI Feedback — Check My Writing</span>
+      </button>
+      <div class="ai-feedback-box" id="ai-fb-ex8">
+        <div class="ai-fb-header">
+          <span class="ai-icon">🤖</span>
+          <span class="ai-title">AI Writing Feedback</span>
+        </div>
+        <div class="ai-fb-body" id="ai-fb-body-ex8">Loading…</div>
+      </div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex8-gloss">
+      <div class="glossary-grid">
+        <div class="gloss-card"><div class="gloss-word">State of emergency</div><div class="gloss-pos">noun phrase</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Olağanüstü hal</div><div class="gloss-en">special powers due to danger</div></div>
+        <div class="gloss-card"><div class="gloss-word">Airspace</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Hava sahası</div><div class="gloss-en">sky above a country</div></div>
+        <div class="gloss-card"><div class="gloss-word">Conflict</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Çatışma, anlaşmazlık</div><div class="gloss-en">serious fighting or disagreement</div></div>
+        <div class="gloss-card"><div class="gloss-word">Nuclear</div><div class="gloss-pos">adjective</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Nükleer</div><div class="gloss-en">relating to atomic energy or weapons</div></div>
+        <div class="gloss-card"><div class="gloss-word">Respond</div><div class="gloss-pos">verb</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Yanıt vermek, karşılık vermek</div><div class="gloss-en">to react to a situation</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     EXERCISE 9 – A Toy Helps Baby Monkey
+═══════════════════════════════════════════════════════ -->
+<div class="exercise" id="ex9">
+  <div class="exercise-header" onclick="toggleEx('ex9')">
+    <div class="ex-number">9</div>
+    <div class="ex-meta">
+      <div class="ex-level">Level 2 · Nature</div>
+      <div class="ex-title">A Toy Helps Baby Monkey</div>
+    </div>
+    <div class="ex-chevron">▾</div>
+  </div>
+  <div class="exercise-body">
+    <div class="tabs-nav">
+      <button class="tab-btn active" onclick="openTab(this,'ex9-text')">📄 Text &amp; Audio</button>
+      <button class="tab-btn" onclick="openTab(this,'ex9-mcq')">🔵 Multiple Choice</button>
+      <button class="tab-btn" onclick="openTab(this,'ex9-fill')">✏️ Fill in the Blanks</button>
+      <button class="tab-btn" onclick="openTab(this,'ex9-vocab')">📚 Vocabulary</button>
+      <button class="tab-btn" onclick="openTab(this,'ex9-write')">🖊️ Writing</button>
+      <button class="tab-btn" onclick="openTab(this,'ex9-gloss')">📖 Glossary</button>
+    </div>
+    <div class="tab-content active" id="ex9-text">
+      <a class="article-link-btn" href="https://www.newsinlevels.com/products/a-toy-helps-baby-monkey-level-2/" target="_blank">🔗 Open Original Article</a>
+      <div class="article-text">
+        <p>A baby monkey named Punch lives at Ichikawa City Zoo in Japan. His mother left him when he was born. Zoo workers helped him because baby monkeys usually stay very close to their mothers.</p>
+        <p>They tried different soft objects to comfort him. Finally, they chose a <strong>stuffed</strong> orangutan <strong>toy</strong> because it has long hair and looks a bit like a monkey. Punch now carries the toy everywhere. Many people visit the zoo because videos of Punch became popular online. Also, many people go to IKEA and buy the same toy.</p>
+        <p>The <strong>zookeepers</strong> think his mother left him because of the very hot weather. Punch is still learning how to <strong>communicate</strong> with other monkeys, but he is slowly joining the group.</p>
+      </div>
+      <div class="sc-player-wrap">
+        <div class="sc-player-label">🎧 &nbsp;LISTEN NOW — A Toy Helps Baby Monkey – Level 2</div>
+        <iframe scrolling="no" frameborder="no" allow="autoplay"
+          src="https://w.soundcloud.com/player/?url=https://soundcloud.com/newsinlevels/a-toy-helps-baby-monkey-1&color=%23c8922a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"
+          height="80">
+        </iframe>
+      </div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex9-mcq">
+      <div class="questions-section"><h3><span class="q-icon">🔵</span> Multiple Choice Questions</h3>
+        <div class="question-block"><div class="q-num">Q1</div><div class="q-text">Where does Punch live?</div><div class="options"><label class="option-label"><input type="radio" name="ex9-m1" value="a"/> Tokyo Zoo</label><label class="option-label"><input type="radio" name="ex9-m1" value="b"/> Osaka Aquarium</label><label class="option-label"><input type="radio" name="ex9-m1" value="c"/> Ichikawa City Zoo in Japan</label><label class="option-label"><input type="radio" name="ex9-m1" value="d"/> Singapore Zoo</label></div><div class="feedback" id="fb-ex9-m1"></div></div>
+        <div class="question-block"><div class="q-num">Q2</div><div class="q-text">What toy did zookeepers give Punch?</div><div class="options"><label class="option-label"><input type="radio" name="ex9-m2" value="a"/> A stuffed bear</label><label class="option-label"><input type="radio" name="ex9-m2" value="b"/> A stuffed orangutan toy</label><label class="option-label"><input type="radio" name="ex9-m2" value="c"/> A rubber ball</label><label class="option-label"><input type="radio" name="ex9-m2" value="d"/> A baby doll</label></div><div class="feedback" id="fb-ex9-m2"></div></div>
+        <div class="question-block"><div class="q-num">Q3</div><div class="q-text">Why did Punch's mother leave him?</div><div class="options"><label class="option-label"><input type="radio" name="ex9-m3" value="a"/> She was moved to another zoo</label><label class="option-label"><input type="radio" name="ex9-m3" value="b"/> She became sick</label><label class="option-label"><input type="radio" name="ex9-m3" value="c"/> Zookeepers think it was because of the very hot weather</label><label class="option-label"><input type="radio" name="ex9-m3" value="d"/> She preferred other animals</label></div><div class="feedback" id="fb-ex9-m3"></div></div>
+        <div class="question-block"><div class="q-num">Q4</div><div class="q-text">How did Punch become famous?</div><div class="options"><label class="option-label"><input type="radio" name="ex9-m4" value="a"/> He appeared in a movie</label><label class="option-label"><input type="radio" name="ex9-m4" value="b"/> Videos of him became popular online</label><label class="option-label"><input type="radio" name="ex9-m4" value="c"/> A newspaper wrote about him</label><label class="option-label"><input type="radio" name="ex9-m4" value="d"/> He won an award at the zoo</label></div><div class="feedback" id="fb-ex9-m4"></div></div>
+        <div class="question-block"><div class="q-num">Q5</div><div class="q-text">What is Punch still learning to do?</div><div class="options"><label class="option-label"><input type="radio" name="ex9-m5" value="a"/> How to find food</label><label class="option-label"><input type="radio" name="ex9-m5" value="b"/> How to carry the toy</label><label class="option-label"><input type="radio" name="ex9-m5" value="c"/> How to communicate with other monkeys</label><label class="option-label"><input type="radio" name="ex9-m5" value="d"/> How to climb trees</label></div><div class="feedback" id="fb-ex9-m5"></div></div>
+        <button class="check-btn" onclick="checkMCQ('ex9', {1:'c',2:'b',3:'c',4:'b',5:'c'})">✓ Check Answers</button>
+        <div class="score-display" id="score-ex9-mcq"></div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex9-fill">
+      <div class="questions-section"><h3><span class="q-icon">✏️</span> Fill in the Blanks</h3>
+        <div class="question-block"><div class="q-num">Q1</div><div class="q-text">A baby monkey named __________ lives at Ichikawa City Zoo.</div><input class="fill-input" type="text" id="fi-ex9-1" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex9-1"></div></div>
+        <div class="question-block"><div class="q-num">Q2</div><div class="q-text">Zookeepers chose a stuffed orangutan toy because it has long __________ .</div><input class="fill-input" type="text" id="fi-ex9-2" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex9-2"></div></div>
+        <div class="question-block"><div class="q-num">Q3</div><div class="q-text">Many people visit the zoo because videos of Punch became popular __________ .</div><input class="fill-input" type="text" id="fi-ex9-3" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex9-3"></div></div>
+        <div class="question-block"><div class="q-num">Q4</div><div class="q-text">Punch is slowly __________ the group of monkeys.</div><input class="fill-input" type="text" id="fi-ex9-4" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex9-4"></div></div>
+        <div class="question-block"><div class="q-num">Q5</div><div class="q-text">Many people went to IKEA to buy the same __________ .</div><input class="fill-input" type="text" id="fi-ex9-5" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex9-5"></div></div>
+        <button class="check-btn" onclick="checkFill('ex9', ['punch','hair','online','joining','toy'])">✓ Check Answers</button>
+        <div class="score-display" id="score-ex9-fill"></div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex9-vocab">
+      <div class="questions-section"><h3><span class="q-icon">📚</span> Vocabulary – Meaning Match</h3>
+        <div class="question-block"><div class="q-num">Q1</div><div class="q-text">What does <strong>"stuffed toy"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex9-v1" value="a"/> A mechanical toy with batteries</label><label class="vocab-option"><input type="radio" name="ex9-v1" value="b"/> A soft toy filled with cotton or foam</label><label class="vocab-option"><input type="radio" name="ex9-v1" value="c"/> A wooden toy for children</label><label class="vocab-option"><input type="radio" name="ex9-v1" value="d"/> A toy that moves on its own</label></div><div class="feedback" id="vfb-ex9-1"></div></div>
+        <div class="question-block"><div class="q-num">Q2</div><div class="q-text">What does <strong>"zookeeper"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex9-v2" value="a"/> A visitor to a zoo</label><label class="vocab-option"><input type="radio" name="ex9-v2" value="b"/> A scientist who studies animals</label><label class="vocab-option"><input type="radio" name="ex9-v2" value="c"/> A person who takes care of animals in a zoo</label><label class="vocab-option"><input type="radio" name="ex9-v2" value="d"/> The manager of a nature park</label></div><div class="feedback" id="vfb-ex9-2"></div></div>
+        <div class="question-block"><div class="q-num">Q3</div><div class="q-text">What does <strong>"communicate"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex9-v3" value="a"/> To eat together</label><label class="vocab-option"><input type="radio" name="ex9-v3" value="b"/> To share and exchange information or feelings</label><label class="vocab-option"><input type="radio" name="ex9-v3" value="c"/> To fight with others</label><label class="vocab-option"><input type="radio" name="ex9-v3" value="d"/> To sleep in the same area</label></div><div class="feedback" id="vfb-ex9-3"></div></div>
+        <div class="question-block"><div class="q-num">Q4</div><div class="q-text">What does <strong>"comfort"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex9-v4" value="a"/> To make someone feel scared</label><label class="vocab-option"><input type="radio" name="ex9-v4" value="b"/> To make someone feel better when they are sad</label><label class="vocab-option"><input type="radio" name="ex9-v4" value="c"/> To give food to an animal</label><label class="vocab-option"><input type="radio" name="ex9-v4" value="d"/> To train an animal</label></div><div class="feedback" id="vfb-ex9-4"></div></div>
+        <div class="question-block"><div class="q-num">Q5</div><div class="q-text">What does <strong>"popular"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex9-v5" value="a"/> Liked or enjoyed by many people</label><label class="vocab-option"><input type="radio" name="ex9-v5" value="b"/> Very old and traditional</label><label class="vocab-option"><input type="radio" name="ex9-v5" value="c"/> Expensive and rare</label><label class="vocab-option"><input type="radio" name="ex9-v5" value="d"/> New and unknown</label></div><div class="feedback" id="vfb-ex9-5"></div></div>
+        <button class="check-btn" onclick="checkVocab('ex9', {1:'b',2:'c',3:'b',4:'b',5:'a'})">✓ Check Answers</button>
+        <div class="score-display" id="score-ex9-vocab"></div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex9-write">
+      <div class="questions-section"><h3><span class="q-icon">🖊️</span> Writing Task</h3>
+        <div class="writing-prompt"><strong>Write a short paragraph (60–100 words):</strong><br/><br/>Punch the baby monkey needs comfort after being separated from his mother. The zookeepers found a creative solution — giving him a stuffed toy that looks like a monkey. Think about a time when you or someone you know found comfort in an unusual or creative way. How does this story of Punch make you feel? Write your personal response using details from the article.</div>
+        <textarea class="writing-area" id="write-ex9" placeholder="Write your paragraph here..." oninput="countWords(this,'wc-ex9')"></textarea>
+        <div class="word-count" id="wc-ex9">Words: 0</div>
+      <button class="writing-check-btn" id="check-btn-ex9" onclick="checkWriting('ex9')">
+        <div class="spinner"></div>
+        <span class="btn-text">✦ AI Feedback — Check My Writing</span>
+      </button>
+      <div class="ai-feedback-box" id="ai-fb-ex9">
+        <div class="ai-fb-header">
+          <span class="ai-icon">🤖</span>
+          <span class="ai-title">AI Writing Feedback</span>
+        </div>
+        <div class="ai-fb-body" id="ai-fb-body-ex9">Loading…</div>
+      </div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex9-gloss">
+      <div class="glossary-grid">
+        <div class="gloss-card"><div class="gloss-word">Stuffed toy</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Peluş oyuncak</div><div class="gloss-en">a soft toy filled with stuffing</div></div>
+        <div class="gloss-card"><div class="gloss-word">Zookeeper</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Hayvan bakıcısı</div><div class="gloss-en">a person who cares for zoo animals</div></div>
+        <div class="gloss-card"><div class="gloss-word">Communicate</div><div class="gloss-pos">verb</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> İletişim kurmak</div><div class="gloss-en">to share information or feelings</div></div>
+        <div class="gloss-card"><div class="gloss-word">Comfort</div><div class="gloss-pos">verb / noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Teselli etmek / rahatlık</div><div class="gloss-en">to make someone feel better</div></div>
+        <div class="gloss-card"><div class="gloss-word">Popular</div><div class="gloss-pos">adjective</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Popüler, sevilen</div><div class="gloss-en">liked by many people</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     EXERCISE 10 – Venezuela's Oil
+═══════════════════════════════════════════════════════ -->
+<div class="exercise" id="ex10">
+  <div class="exercise-header" onclick="toggleEx('ex10')">
+    <div class="ex-number">10</div>
+    <div class="ex-meta">
+      <div class="ex-level">Level 2 · Economy</div>
+      <div class="ex-title">Venezuela's Oil</div>
+    </div>
+    <div class="ex-chevron">▾</div>
+  </div>
+  <div class="exercise-body">
+    <div class="tabs-nav">
+      <button class="tab-btn active" onclick="openTab(this,'ex10-text')">📄 Text &amp; Audio</button>
+      <button class="tab-btn" onclick="openTab(this,'ex10-mcq')">🔵 Multiple Choice</button>
+      <button class="tab-btn" onclick="openTab(this,'ex10-fill')">✏️ Fill in the Blanks</button>
+      <button class="tab-btn" onclick="openTab(this,'ex10-vocab')">📚 Vocabulary</button>
+      <button class="tab-btn" onclick="openTab(this,'ex10-write')">🖊️ Writing</button>
+      <button class="tab-btn" onclick="openTab(this,'ex10-gloss')">📖 Glossary</button>
+    </div>
+    <div class="tab-content active" id="ex10-text">
+      <a class="article-link-btn" href="https://www.newsinlevels.com/products/venezuelas-oil-level-2/" target="_blank">🔗 Open Original Article</a>
+      <div class="article-text">
+        <p>Venezuela has very large oil <strong>reserves</strong>, especially in the Orinoco Belt, but most of its oil is heavy and thick. This makes it hard and expensive to take out of the ground and process. It also creates high emissions, including <strong>methane</strong>, which is very harmful for the planet.</p>
+        <p>Lighter oils from other countries are easier to <strong>extract</strong> and give better products like gasoline. Venezuela's oil often becomes asphalt or heavy fuel, which are not so good. The country's oil industry also has many problems, such as broken equipment and poor maintenance.</p>
+        <p>In the past, foreign oil companies had to leave, so investors are careful. Some future technologies could make the oil easier to use, but this would need a lot of money and time.</p>
+      </div>
+      <div class="sc-player-wrap">
+        <div class="sc-player-label">🎧 &nbsp;LISTEN NOW — Venezuela's Oil – Level 2</div>
+        <iframe scrolling="no" frameborder="no" allow="autoplay"
+          src="https://w.soundcloud.com/player/?url=https://soundcloud.com/newsinlevels/venezuelas-oil-level-2&color=%23c8922a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"
+          height="80">
+        </iframe>
+      </div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex10-mcq">
+      <div class="questions-section"><h3><span class="q-icon">🔵</span> Multiple Choice Questions</h3>
+        <div class="question-block"><div class="q-num">Q1</div><div class="q-text">Where are Venezuela's main oil reserves?</div><div class="options"><label class="option-label"><input type="radio" name="ex10-m1" value="a"/> The Amazon Basin</label><label class="option-label"><input type="radio" name="ex10-m1" value="b"/> The Andes Mountains</label><label class="option-label"><input type="radio" name="ex10-m1" value="c"/> The Orinoco Belt</label><label class="option-label"><input type="radio" name="ex10-m1" value="d"/> The Caribbean Coast</label></div><div class="feedback" id="fb-ex10-m1"></div></div>
+        <div class="question-block"><div class="q-num">Q2</div><div class="q-text">What makes Venezuela's oil difficult to use?</div><div class="options"><label class="option-label"><input type="radio" name="ex10-m2" value="a"/> It is buried too deep underground</label><label class="option-label"><input type="radio" name="ex10-m2" value="b"/> It is heavy and thick, making extraction expensive</label><label class="option-label"><input type="radio" name="ex10-m2" value="c"/> There is not enough of it</label><label class="option-label"><input type="radio" name="ex10-m2" value="d"/> It is located in a dangerous area</label></div><div class="feedback" id="fb-ex10-m2"></div></div>
+        <div class="question-block"><div class="q-num">Q3</div><div class="q-text">Which harmful gas does Venezuela's oil produce?</div><div class="options"><label class="option-label"><input type="radio" name="ex10-m3" value="a"/> Carbon dioxide</label><label class="option-label"><input type="radio" name="ex10-m3" value="b"/> Nitrogen</label><label class="option-label"><input type="radio" name="ex10-m3" value="c"/> Methane</label><label class="option-label"><input type="radio" name="ex10-m3" value="d"/> Sulfur dioxide</label></div><div class="feedback" id="fb-ex10-m3"></div></div>
+        <div class="question-block"><div class="q-num">Q4</div><div class="q-text">Why are investors careful about Venezuela's oil industry?</div><div class="options"><label class="option-label"><input type="radio" name="ex10-m4" value="a"/> Oil prices are too low</label><label class="option-label"><input type="radio" name="ex10-m4" value="b"/> The country has no oil left</label><label class="option-label"><input type="radio" name="ex10-m4" value="c"/> Foreign oil companies had to leave in the past</label><label class="option-label"><input type="radio" name="ex10-m4" value="d"/> The government keeps all profits</label></div><div class="feedback" id="fb-ex10-m4"></div></div>
+        <div class="question-block"><div class="q-num">Q5</div><div class="q-text">What products does Venezuela's heavy oil mainly become?</div><div class="options"><label class="option-label"><input type="radio" name="ex10-m5" value="a"/> Gasoline and diesel</label><label class="option-label"><input type="radio" name="ex10-m5" value="b"/> Plastic and chemicals</label><label class="option-label"><input type="radio" name="ex10-m5" value="c"/> Asphalt and heavy fuel</label><label class="option-label"><input type="radio" name="ex10-m5" value="d"/> Natural gas and fertiliser</label></div><div class="feedback" id="fb-ex10-m5"></div></div>
+        <button class="check-btn" onclick="checkMCQ('ex10', {1:'c',2:'b',3:'c',4:'c',5:'c'})">✓ Check Answers</button>
+        <div class="score-display" id="score-ex10-mcq"></div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex10-fill">
+      <div class="questions-section"><h3><span class="q-icon">✏️</span> Fill in the Blanks</h3>
+        <div class="question-block"><div class="q-num">Q1</div><div class="q-text">Venezuela has very large oil __________ in the Orinoco Belt.</div><input class="fill-input" type="text" id="fi-ex10-1" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex10-1"></div></div>
+        <div class="question-block"><div class="q-num">Q2</div><div class="q-text">Venezuela's oil creates high __________, including methane.</div><input class="fill-input" type="text" id="fi-ex10-2" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex10-2"></div></div>
+        <div class="question-block"><div class="q-num">Q3</div><div class="q-text">Lighter oils from other countries are easier to __________ .</div><input class="fill-input" type="text" id="fi-ex10-3" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex10-3"></div></div>
+        <div class="question-block"><div class="q-num">Q4</div><div class="q-text">Venezuela's oil often becomes __________ or heavy fuel.</div><input class="fill-input" type="text" id="fi-ex10-4" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex10-4"></div></div>
+        <div class="question-block"><div class="q-num">Q5</div><div class="q-text">The oil industry has problems such as broken equipment and poor __________ .</div><input class="fill-input" type="text" id="fi-ex10-5" placeholder="Type your answer..."/><div class="feedback" id="ffb-ex10-5"></div></div>
+        <button class="check-btn" onclick="checkFill('ex10', ['reserves','emissions','extract','asphalt','maintenance'])">✓ Check Answers</button>
+        <div class="score-display" id="score-ex10-fill"></div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex10-vocab">
+      <div class="questions-section"><h3><span class="q-icon">📚</span> Vocabulary – Meaning Match</h3>
+        <div class="question-block"><div class="q-num">Q1</div><div class="q-text">What does <strong>"reserve"</strong> mean in this context?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex10-v1" value="a"/> A nature park</label><label class="vocab-option"><input type="radio" name="ex10-v1" value="b"/> A supply of something kept for future use</label><label class="vocab-option"><input type="radio" name="ex10-v1" value="c"/> A type of fuel</label><label class="vocab-option"><input type="radio" name="ex10-v1" value="d"/> A place to store food</label></div><div class="feedback" id="vfb-ex10-1"></div></div>
+        <div class="question-block"><div class="q-num">Q2</div><div class="q-text">What does <strong>"methane"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex10-v2" value="a"/> A type of metal</label><label class="vocab-option"><input type="radio" name="ex10-v2" value="b"/> A strong greenhouse gas harmful to the climate</label><label class="vocab-option"><input type="radio" name="ex10-v2" value="c"/> A liquid fuel for cars</label><label class="vocab-option"><input type="radio" name="ex10-v2" value="d"/> A type of mineral</label></div><div class="feedback" id="vfb-ex10-2"></div></div>
+        <div class="question-block"><div class="q-num">Q3</div><div class="q-text">What does <strong>"extract"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex10-v3" value="a"/> To add something to the ground</label><label class="vocab-option"><input type="radio" name="ex10-v3" value="b"/> To take something out from a source</label><label class="vocab-option"><input type="radio" name="ex10-v3" value="c"/> To recycle a material</label><label class="vocab-option"><input type="radio" name="ex10-v3" value="d"/> To transport goods overseas</label></div><div class="feedback" id="vfb-ex10-3"></div></div>
+        <div class="question-block"><div class="q-num">Q4</div><div class="q-text">What does <strong>"emission"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex10-v4" value="a"/> A type of oil product</div><label class="vocab-option"><input type="radio" name="ex10-v4" value="b"/> The release of gases into the atmosphere</label><label class="vocab-option"><input type="radio" name="ex10-v4" value="c"/> The amount of money an industry earns</label><label class="vocab-option"><input type="radio" name="ex10-v4" value="d"/> A government regulation</label></div><div class="feedback" id="vfb-ex10-4"></div></div>
+        <div class="question-block"><div class="q-num">Q5</div><div class="q-text">What does <strong>"maintenance"</strong> mean?</div><div class="vocab-options"><label class="vocab-option"><input type="radio" name="ex10-v5" value="a"/> Building new factories</label><label class="vocab-option"><input type="radio" name="ex10-v5" value="b"/> The process of keeping equipment in good working condition</label><label class="vocab-option"><input type="radio" name="ex10-v5" value="c"/> Training workers</label><label class="vocab-option"><input type="radio" name="ex10-v5" value="d"/> Selling oil to other countries</label></div><div class="feedback" id="vfb-ex10-5"></div></div>
+        <button class="check-btn" onclick="checkVocab('ex10', {1:'b',2:'b',3:'b',4:'b',5:'b'})">✓ Check Answers</button>
+        <div class="score-display" id="score-ex10-vocab"></div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex10-write">
+      <div class="questions-section"><h3><span class="q-icon">🖊️</span> Writing Task</h3>
+        <div class="writing-prompt"><strong>Write a short paragraph (60–100 words):</strong><br/><br/>Venezuela has one of the world's largest oil reserves, but its oil is difficult to use and causes high emissions. Some people think countries should stop using fossil fuels, while others believe they are necessary for economic development. Based on the article, do you think Venezuela should try to develop its oil industry or focus on finding cleaner energy sources? Explain your view with reasons.</div>
+        <textarea class="writing-area" id="write-ex10" placeholder="Write your paragraph here..." oninput="countWords(this,'wc-ex10')"></textarea>
+        <div class="word-count" id="wc-ex10">Words: 0</div>
+      <button class="writing-check-btn" id="check-btn-ex10" onclick="checkWriting('ex10')">
+        <div class="spinner"></div>
+        <span class="btn-text">✦ AI Feedback — Check My Writing</span>
+      </button>
+      <div class="ai-feedback-box" id="ai-fb-ex10">
+        <div class="ai-fb-header">
+          <span class="ai-icon">🤖</span>
+          <span class="ai-title">AI Writing Feedback</span>
+        </div>
+        <div class="ai-fb-body" id="ai-fb-body-ex10">Loading…</div>
+      </div>
+      </div>
+    </div>
+    <div class="tab-content" id="ex10-gloss">
+      <div class="glossary-grid">
+        <div class="gloss-card"><div class="gloss-word">Reserve</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Rezerv, kaynak</div><div class="gloss-en">a supply kept for future use</div></div>
+        <div class="gloss-card"><div class="gloss-word">Methane</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Metan</div><div class="gloss-en">a potent greenhouse gas</div></div>
+        <div class="gloss-card"><div class="gloss-word">Extract</div><div class="gloss-pos">verb</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Çıkarmak, elde etmek</div><div class="gloss-en">to take out from a source</div></div>
+        <div class="gloss-card"><div class="gloss-word">Emission</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Salım, emisyon</div><div class="gloss-en">gases released into the atmosphere</div></div>
+        <div class="gloss-card"><div class="gloss-word">Maintenance</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Bakım, idame</div><div class="gloss-en">keeping equipment in working order</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <span>NEU</span> · Necmettin Erbakan University · School of Foreign Languages · English Preparatory Programme<br/>
+  <span style="color:var(--muted);font-size:9px;letter-spacing:1px">Listening Practice Portal · Academic Year 2025–2026</span>
+</footer>
+
+<script>
+/* ── TOGGLE EXERCISE ── */
+function toggleEx(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('open');
+}
+
+/* ── OPEN TAB ── */
+function openTab(btn, contentId) {
+  const body = btn.closest('.exercise-body');
+  body.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  body.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(contentId).classList.add('active');
+}
+
+/* ── CHECK MCQ ── */
+function checkMCQ(exId, answers) {
+  let score = 0;
+  for (let n = 1; n <= 5; n++) {
+    const key = `${exId}-m${n}`;
+    const chosen = document.querySelector(`input[name="${key}"]:checked`);
+    const fb = document.getElementById(`fb-${key}`);
+    const block = chosen ? chosen.closest('.question-block') : null;
+    const correct = answers[n];
+    // reset
+    document.querySelectorAll(`input[name="${key}"]`).forEach(r => {
+      r.parentElement.classList.remove('selected-correct','selected-wrong','reveal-correct');
+    });
+    if (block) block.classList.remove('correct','wrong');
+    if (!chosen) {
+      if (fb) { fb.className='feedback wrong'; fb.innerHTML='⚠️ No answer selected. Correct answer: <strong>option '+correct.toUpperCase()+'</strong>'; }
+      continue;
+    }
+    const allLabels = document.querySelectorAll(`input[name="${key}"]`);
+    allLabels.forEach(r => {
+      if (r.value === correct) r.parentElement.classList.add('reveal-correct');
+    });
+    if (chosen.value === correct) {
+      chosen.parentElement.classList.add('selected-correct');
+      chosen.parentElement.classList.remove('reveal-correct');
+      if (block) block.classList.add('correct');
+      if (fb) { fb.className='feedback correct'; fb.innerHTML='✔ Correct!'; }
+      score++;
+    } else {
+      chosen.parentElement.classList.add('selected-wrong');
+      if (block) block.classList.add('wrong');
+      if (fb) { fb.className='feedback wrong'; fb.innerHTML='✘ Incorrect. The correct answer is highlighted in green above.'; }
+    }
+  }
+  const sd = document.getElementById(`score-${exId}-mcq`);
+  if (sd) { sd.style.display='block'; sd.textContent=`Score: ${score} / 5 — ${score===5?'Excellent! 🌟':score>=3?'Good effort! Keep practising.':'Keep listening and try again!'}` }
+}
+
+/* ── CHECK FILL ── */
+function checkFill(exId, answers) {
+  let score = 0;
+  answers.forEach((ans, i) => {
+    const n = i+1;
+    const inp = document.getElementById(`fi-${exId}-${n}`);
+    const fb = document.getElementById(`ffb-${exId}-${n}`);
+    const block = inp ? inp.closest('.question-block') : null;
+    if (!inp) return;
+    const val = inp.value.trim().toLowerCase();
+    inp.classList.remove('correct-input','wrong-input');
+    if (block) block.classList.remove('correct','wrong');
+    if (val === ans.toLowerCase()) {
+      inp.classList.add('correct-input');
+      if (block) block.classList.add('correct');
+      if (fb) { fb.className='feedback correct'; fb.innerHTML='✔ Correct!'; }
+      score++;
+    } else {
+      inp.classList.add('wrong-input');
+      if (block) block.classList.add('wrong');
+      if (fb) { fb.className='feedback wrong'; fb.innerHTML=`✘ Incorrect. The correct answer is: <strong>${ans}</strong>`; }
+    }
+  });
+  const sd = document.getElementById(`score-${exId}-fill`);
+  if (sd) { sd.style.display='block'; sd.textContent=`Score: ${score} / 5 — ${score===5?'Perfect! 🌟':score>=3?'Good job!':'Review the text and try again.'}` }
+}
+
+/* ── CHECK VOCAB ── */
+function checkVocab(exId, answers) {
+  let score = 0;
+  for (let n = 1; n <= 5; n++) {
+    const key = `${exId}-v${n}`;
+    const chosen = document.querySelector(`input[name="${key}"]:checked`);
+    const fb = document.getElementById(`vfb-${exId}-${n}`);
+    const block = chosen ? chosen.closest('.question-block') : null;
+    const correct = answers[n];
+    document.querySelectorAll(`input[name="${key}"]`).forEach(r => {
+      r.parentElement.classList.remove('selected-correct','selected-wrong','reveal-correct');
+    });
+    if (block) block.classList.remove('correct','wrong');
+    if (!chosen) {
+      if (fb) { fb.className='feedback wrong'; fb.innerHTML='⚠️ Please select an answer.'; }
+      continue;
+    }
+    document.querySelectorAll(`input[name="${key}"]`).forEach(r => {
+      if (r.value === correct) r.parentElement.classList.add('reveal-correct');
+    });
+    if (chosen.value === correct) {
+      chosen.parentElement.classList.add('selected-correct');
+      chosen.parentElement.classList.remove('reveal-correct');
+      if (block) block.classList.add('correct');
+      if (fb) { fb.className='feedback correct'; fb.innerHTML='✔ Correct!'; }
+      score++;
+    } else {
+      chosen.parentElement.classList.add('selected-wrong');
+      if (block) block.classList.add('wrong');
+      if (fb) { fb.className='feedback wrong'; fb.innerHTML='✘ Incorrect. The correct answer is highlighted above.'; }
+    }
+  }
+  const sd = document.getElementById(`score-${exId}-vocab`);
+  if (sd) { sd.style.display='block'; sd.textContent=`Score: ${score} / 5 — ${score===5?'Excellent vocabulary! 🌟':score>=3?'Well done!':'Study the glossary and try again.'}` }
+}
+
+/* ── WORD COUNT ── */
+function countWords(el, counterId) {
+  const words = el.value.trim().split(/\s+/).filter(w => w.length > 0);
+  const counter = document.getElementById(counterId);
+  if (counter) {
+    const count = el.value.trim() === '' ? 0 : words.length;
+    counter.textContent = `Words: ${count}`;
+    counter.style.color = count >= 60 && count <= 100 ? '#4caf50' : count > 100 ? '#e53935' : 'var(--muted)';
+  }
+}
+</script>
+
+<script>
+// ── AI WRITING CHECKER ──────────────────────────────────────────────
+async function checkWriting(exId) {
+  const textarea = document.getElementById('write-' + exId);
+  const btn = document.getElementById('check-btn-' + exId);
+  const fbBox = document.getElementById('ai-fb-' + exId);
+  const fbBody = document.getElementById('ai-fb-body-' + exId);
+
+  const text = textarea.value.trim();
+  if (!text || text.split(/\s+/).length < 10) {
+    fbBox.classList.add('visible');
+    fbBody.innerHTML = '<p style="color:#ff6b6b;">⚠ Please write at least 10 words before checking.</p>';
+    return;
+  }
+
+  const promptEl = textarea.closest('.tab-content') 
+    ? textarea.closest('.tab-content').querySelector('.writing-prompt')
+    : null;
+  const writingPrompt = promptEl ? promptEl.innerText.trim() : 'Write a short paragraph about the topic.';
+
+  btn.classList.add('loading');
+  btn.disabled = true;
+  fbBox.classList.add('visible');
+  fbBody.innerHTML = '<p style="opacity:0.6;font-style:italic;">🤖 Analysing your writing…</p>';
+
+  const systemPrompt = `You are a friendly English writing tutor for B1-B2 level university preparatory students. Check the student paragraph for grammar, vocabulary, coherence, and task completion. Reply ONLY with HTML (no markdown, no code fences). Use exactly this structure:
+
+<div class="fb-section"><div class="fb-section-title">📝 Corrected Version</div><div class="corrected-text">WRITE THE FULL CORRECTED PARAGRAPH HERE. For each error, show: <span class="error-mark">wrong</span> <span class="correction">→ correct</span> inline.</div></div>
+<div class="fb-section"><div class="fb-section-title">🔍 Errors Found</div><ul>LIST EACH ERROR as <li><strong>Type:</strong> explanation</li></ul></div>
+<div class="fb-section"><div class="fb-section-title">💡 Writing Tips</div><ul>2-3 tips as <li> items</ul></div>
+<div class="fb-section"><div class="fb-section-title">⭐ Overall</div><p>1-2 encouraging sentences.</p><div class="score-pill">Score: X/10</div></div>
+
+If no errors, celebrate and give tips for improvement anyway.`;
+
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-iab': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 1024,
+        system: systemPrompt,
+        messages: [{
+          role: 'user',
+          content: 'Writing task: ' + writingPrompt + '\n\nStudent wrote:\n' + text
+        }]
+      })
+    });
+
+    if (!resp.ok) {
+      const errData = await resp.json().catch(() => ({}));
+      throw new Error((errData.error && errData.error.message) || 'HTTP ' + resp.status);
+    }
+
+    const data = await resp.json();
+    const content = data.content && data.content[0] && data.content[0].text;
+    if (content) {
+      // Strip any accidental code fences
+      fbBody.innerHTML = content.replace(/```html?\n?/g,'').replace(/```/g,'').trim();
+    } else {
+      fbBody.innerHTML = '<p style="color:#ff6b6b;">⚠ No response received. Please try again.</p>';
+    }
+  } catch (err) {
+    fbBody.innerHTML = '<p style="color:#ff6b6b;">⚠ Error: ' + err.message + '</p><p style="font-size:12px;opacity:0.7;margin-top:6px;">Note: This feature requires an internet connection and works when the page is served via Claude.ai or a web server.</p>';
+  }
+
+  btn.classList.remove('loading');
+  btn.disabled = false;
+  fbBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+</script>
+
+</body>
+</html>
