@@ -524,99 +524,7 @@ footer span { color: var(--accent); }
   .main { padding: 24px 12px 60px; }
 }
 
-/* ── AI WRITING CHECKER ── */
-.writing-check-btn {
-  background: linear-gradient(135deg, #1a6b6b, #0d4f4f);
-  color: white;
-  border: none;
-  padding: 12px 28px;
-  border-radius: 8px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 12px;
-}
-.writing-check-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(26,107,107,0.4); }
-.writing-check-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-.writing-check-btn .spinner {
-  width: 14px; height: 14px;
-  border: 2px solid rgba(255,255,255,0.3);
-  border-top-color: white;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-  display: none;
-}
-.writing-check-btn.loading .spinner { display: block; }
-.writing-check-btn.loading .btn-text { display: none; }
-@keyframes spin { to { transform: rotate(360deg); } }
 
-.ai-feedback-box {
-  display: none;
-  margin-top: 20px;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid rgba(200,146,42,0.3);
-  background: rgba(0,0,0,0.25);
-}
-.ai-feedback-box.visible { display: block; }
-.ai-fb-header {
-  background: linear-gradient(90deg, rgba(200,146,42,0.2), transparent);
-  padding: 12px 18px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border-bottom: 1px solid rgba(200,146,42,0.15);
-}
-.ai-fb-header .ai-icon { font-size: 18px; }
-.ai-fb-header .ai-title {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--gold);
-}
-.ai-fb-body { padding: 18px 20px; font-size: 14px; line-height: 1.8; color: var(--text); }
-.ai-fb-body .corrected-text {
-  background: rgba(255,255,255,0.05);
-  border-left: 3px solid var(--gold);
-  padding: 12px 16px;
-  border-radius: 0 8px 8px 0;
-  margin: 12px 0;
-  font-style: italic;
-  line-height: 1.9;
-}
-.ai-fb-body .error-mark { color: #ff6b6b; text-decoration: line-through; }
-.ai-fb-body .correction { color: #69db7c; font-weight: 600; }
-.ai-fb-body .fb-section { margin-top: 14px; }
-.ai-fb-body .fb-section-title {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 6px;
-}
-.ai-fb-body ul { padding-left: 18px; }
-.ai-fb-body li { margin-bottom: 5px; }
-.score-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(200,146,42,0.15);
-  border: 1px solid rgba(200,146,42,0.3);
-  border-radius: 20px;
-  padding: 4px 12px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  color: var(--gold);
-  margin-top: 8px;
-}
 
 </style>
 </head>
@@ -660,7 +568,6 @@ footer span { color: var(--accent); }
       <button class="tab-btn" onclick="openTab(this,'ex1-mcq')">🔵 Multiple Choice</button>
       <button class="tab-btn" onclick="openTab(this,'ex1-fill')">✏️ Fill in the Blanks</button>
       <button class="tab-btn" onclick="openTab(this,'ex1-vocab')">📚 Vocabulary</button>
-      <button class="tab-btn" onclick="openTab(this,'ex1-write')">🖊️ Writing</button>
       <button class="tab-btn" onclick="openTab(this,'ex1-gloss')">📖 Glossary</button>
     </div>
 
@@ -868,28 +775,7 @@ footer span { color: var(--accent); }
     </div>
 
     <!-- WRITING TAB -->
-    <div class="tab-content" id="ex1-write">
-      <div class="questions-section">
-        <h3><span class="q-icon">🖊️</span> Writing Task</h3>
-        <div class="writing-prompt">
-          <strong>Write a short paragraph (60–100 words):</strong><br/><br/>
-          Trudeau made a promise in 2015 to help Indigenous people in Canada, but the situation has become worse. Do you think politicians always keep their promises? Why or why not? Use examples from the text and your own ideas to support your answer.
-        </div>
-        <textarea class="writing-area" id="write-ex1" placeholder="Write your paragraph here..." oninput="countWords(this,'wc-ex1')"></textarea>
-        <div class="word-count" id="wc-ex1">Words: 0</div>
-      <button class="writing-check-btn" id="check-btn-ex1" onclick="checkWriting('ex1')">
-        <div class="spinner"></div>
-        <span class="btn-text">✦ AI Feedback — Check My Writing</span>
-      </button>
-      <div class="ai-feedback-box" id="ai-fb-ex1">
-        <div class="ai-fb-header">
-          <span class="ai-icon">🤖</span>
-          <span class="ai-title">AI Writing Feedback</span>
-        </div>
-        <div class="ai-fb-body" id="ai-fb-body-ex1">Loading…</div>
-      </div>
-      </div>
-    </div>
+    
 
     <!-- GLOSSARY TAB -->
     <div class="tab-content" id="ex1-gloss">
@@ -947,7 +833,6 @@ footer span { color: var(--accent); }
       <button class="tab-btn" onclick="openTab(this,'ex2-mcq')">🔵 Multiple Choice</button>
       <button class="tab-btn" onclick="openTab(this,'ex2-fill')">✏️ Fill in the Blanks</button>
       <button class="tab-btn" onclick="openTab(this,'ex2-vocab')">📚 Vocabulary</button>
-      <button class="tab-btn" onclick="openTab(this,'ex2-write')">🖊️ Writing</button>
       <button class="tab-btn" onclick="openTab(this,'ex2-gloss')">📖 Glossary</button>
     </div>
 
@@ -1053,28 +938,7 @@ footer span { color: var(--accent); }
       </div>
     </div>
 
-    <div class="tab-content" id="ex2-write">
-      <div class="questions-section">
-        <h3><span class="q-icon">🖊️</span> Writing Task</h3>
-        <div class="writing-prompt">
-          <strong>Write a short paragraph (60–100 words):</strong><br/><br/>
-          The article says that AI is now used in modern war, but many people are worried about this. What do you think are the biggest risks of using AI in military situations? Should there be international rules about this? Explain your ideas using information from the text.
-        </div>
-        <textarea class="writing-area" id="write-ex2" placeholder="Write your paragraph here..." oninput="countWords(this,'wc-ex2')"></textarea>
-        <div class="word-count" id="wc-ex2">Words: 0</div>
-      <button class="writing-check-btn" id="check-btn-ex2" onclick="checkWriting('ex2')">
-        <div class="spinner"></div>
-        <span class="btn-text">✦ AI Feedback — Check My Writing</span>
-      </button>
-      <div class="ai-feedback-box" id="ai-fb-ex2">
-        <div class="ai-fb-header">
-          <span class="ai-icon">🤖</span>
-          <span class="ai-title">AI Writing Feedback</span>
-        </div>
-        <div class="ai-fb-body" id="ai-fb-body-ex2">Loading…</div>
-      </div>
-      </div>
-    </div>
+    
 
     <div class="tab-content" id="ex2-gloss">
       <div class="glossary-grid">
@@ -1106,7 +970,6 @@ footer span { color: var(--accent); }
       <button class="tab-btn" onclick="openTab(this,'ex3-mcq')">🔵 Multiple Choice</button>
       <button class="tab-btn" onclick="openTab(this,'ex3-fill')">✏️ Fill in the Blanks</button>
       <button class="tab-btn" onclick="openTab(this,'ex3-vocab')">📚 Vocabulary</button>
-      <button class="tab-btn" onclick="openTab(this,'ex3-write')">🖊️ Writing</button>
       <button class="tab-btn" onclick="openTab(this,'ex3-gloss')">📖 Glossary</button>
     </div>
     <div class="tab-content active" id="ex3-text">
@@ -1158,24 +1021,7 @@ footer span { color: var(--accent); }
         <div class="score-display" id="score-ex3-vocab"></div>
       </div>
     </div>
-    <div class="tab-content" id="ex3-write">
-      <div class="questions-section"><h3><span class="q-icon">🖊️</span> Writing Task</h3>
-        <div class="writing-prompt"><strong>Write a short paragraph (60–100 words):</strong><br/><br/>Anthropic refused to let the military use its AI without strict rules, while OpenAI agreed to a deal but then decided to change it. Which company do you think made a better decision? Justify your opinion using ideas from the text and your own thinking.</div>
-        <textarea class="writing-area" id="write-ex3" placeholder="Write your paragraph here..." oninput="countWords(this,'wc-ex3')"></textarea>
-        <div class="word-count" id="wc-ex3">Words: 0</div>
-      <button class="writing-check-btn" id="check-btn-ex3" onclick="checkWriting('ex3')">
-        <div class="spinner"></div>
-        <span class="btn-text">✦ AI Feedback — Check My Writing</span>
-      </button>
-      <div class="ai-feedback-box" id="ai-fb-ex3">
-        <div class="ai-fb-header">
-          <span class="ai-icon">🤖</span>
-          <span class="ai-title">AI Writing Feedback</span>
-        </div>
-        <div class="ai-fb-body" id="ai-fb-body-ex3">Loading…</div>
-      </div>
-      </div>
-    </div>
+    
     <div class="tab-content" id="ex3-gloss">
       <div class="glossary-grid">
         <div class="gloss-card"><div class="gloss-word">Government</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Hükümet</div><div class="gloss-en">the group that runs a country</div></div>
@@ -1206,7 +1052,6 @@ footer span { color: var(--accent); }
       <button class="tab-btn" onclick="openTab(this,'ex4-mcq')">🔵 Multiple Choice</button>
       <button class="tab-btn" onclick="openTab(this,'ex4-fill')">✏️ Fill in the Blanks</button>
       <button class="tab-btn" onclick="openTab(this,'ex4-vocab')">📚 Vocabulary</button>
-      <button class="tab-btn" onclick="openTab(this,'ex4-write')">🖊️ Writing</button>
       <button class="tab-btn" onclick="openTab(this,'ex4-gloss')">📖 Glossary</button>
     </div>
     <div class="tab-content active" id="ex4-text">
@@ -1258,24 +1103,7 @@ footer span { color: var(--accent); }
         <div class="score-display" id="score-ex4-vocab"></div>
       </div>
     </div>
-    <div class="tab-content" id="ex4-write">
-      <div class="questions-section"><h3><span class="q-icon">🖊️</span> Writing Task</h3>
-        <div class="writing-prompt"><strong>Write a short paragraph (60–100 words):</strong><br/><br/>Sporting events often bring people together across political and cultural boundaries. Based on the story of Inter Miami's visit to the White House, write about why you think sports and politics sometimes mix, and whether you think this is a good or bad thing. Use specific details from the article.</div>
-        <textarea class="writing-area" id="write-ex4" placeholder="Write your paragraph here..." oninput="countWords(this,'wc-ex4')"></textarea>
-        <div class="word-count" id="wc-ex4">Words: 0</div>
-      <button class="writing-check-btn" id="check-btn-ex4" onclick="checkWriting('ex4')">
-        <div class="spinner"></div>
-        <span class="btn-text">✦ AI Feedback — Check My Writing</span>
-      </button>
-      <div class="ai-feedback-box" id="ai-fb-ex4">
-        <div class="ai-fb-header">
-          <span class="ai-icon">🤖</span>
-          <span class="ai-title">AI Writing Feedback</span>
-        </div>
-        <div class="ai-fb-body" id="ai-fb-body-ex4">Loading…</div>
-      </div>
-      </div>
-    </div>
+    
     <div class="tab-content" id="ex4-gloss">
       <div class="glossary-grid">
         <div class="gloss-card"><div class="gloss-word">Owner</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Sahip, mal sahibi</div><div class="gloss-en">a person who possesses something</div></div>
@@ -1306,7 +1134,6 @@ footer span { color: var(--accent); }
       <button class="tab-btn" onclick="openTab(this,'ex5-mcq')">🔵 Multiple Choice</button>
       <button class="tab-btn" onclick="openTab(this,'ex5-fill')">✏️ Fill in the Blanks</button>
       <button class="tab-btn" onclick="openTab(this,'ex5-vocab')">📚 Vocabulary</button>
-      <button class="tab-btn" onclick="openTab(this,'ex5-write')">🖊️ Writing</button>
       <button class="tab-btn" onclick="openTab(this,'ex5-gloss')">📖 Glossary</button>
     </div>
     <div class="tab-content active" id="ex5-text">
@@ -1358,24 +1185,7 @@ footer span { color: var(--accent); }
         <div class="score-display" id="score-ex5-vocab"></div>
       </div>
     </div>
-    <div class="tab-content" id="ex5-write">
-      <div class="questions-section"><h3><span class="q-icon">🖊️</span> Writing Task</h3>
-        <div class="writing-prompt"><strong>Write a short paragraph (60–100 words):</strong><br/><br/>The article says that Europe depends on American companies for its payment systems and wants to change this. Do you think it is important for countries to control their own financial systems? What might happen if a country depends too much on foreign technology? Use ideas from the text to support your answer.</div>
-        <textarea class="writing-area" id="write-ex5" placeholder="Write your paragraph here..." oninput="countWords(this,'wc-ex5')"></textarea>
-        <div class="word-count" id="wc-ex5">Words: 0</div>
-      <button class="writing-check-btn" id="check-btn-ex5" onclick="checkWriting('ex5')">
-        <div class="spinner"></div>
-        <span class="btn-text">✦ AI Feedback — Check My Writing</span>
-      </button>
-      <div class="ai-feedback-box" id="ai-fb-ex5">
-        <div class="ai-fb-header">
-          <span class="ai-icon">🤖</span>
-          <span class="ai-title">AI Writing Feedback</span>
-        </div>
-        <div class="ai-fb-body" id="ai-fb-body-ex5">Loading…</div>
-      </div>
-      </div>
-    </div>
+    
     <div class="tab-content" id="ex5-gloss">
       <div class="glossary-grid">
         <div class="gloss-card"><div class="gloss-word">Payment</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Ödeme</div><div class="gloss-en">giving money for goods or services</div></div>
@@ -1406,7 +1216,6 @@ footer span { color: var(--accent); }
       <button class="tab-btn" onclick="openTab(this,'ex6-mcq')">🔵 Multiple Choice</button>
       <button class="tab-btn" onclick="openTab(this,'ex6-fill')">✏️ Fill in the Blanks</button>
       <button class="tab-btn" onclick="openTab(this,'ex6-vocab')">📚 Vocabulary</button>
-      <button class="tab-btn" onclick="openTab(this,'ex6-write')">🖊️ Writing</button>
       <button class="tab-btn" onclick="openTab(this,'ex6-gloss')">📖 Glossary</button>
     </div>
     <div class="tab-content active" id="ex6-text">
@@ -1458,24 +1267,7 @@ footer span { color: var(--accent); }
         <div class="score-display" id="score-ex6-vocab"></div>
       </div>
     </div>
-    <div class="tab-content" id="ex6-write">
-      <div class="questions-section"><h3><span class="q-icon">🖊️</span> Writing Task</h3>
-        <div class="writing-prompt"><strong>Write a short paragraph (60–100 words):</strong><br/><br/>Disney is expanding into Asia with a new cruise ship because fewer tourists are travelling to the United States. Think about why tourism patterns change over time. What factors might make tourists choose one destination over another? Use ideas from the article and your own experience to write your response.</div>
-        <textarea class="writing-area" id="write-ex6" placeholder="Write your paragraph here..." oninput="countWords(this,'wc-ex6')"></textarea>
-        <div class="word-count" id="wc-ex6">Words: 0</div>
-      <button class="writing-check-btn" id="check-btn-ex6" onclick="checkWriting('ex6')">
-        <div class="spinner"></div>
-        <span class="btn-text">✦ AI Feedback — Check My Writing</span>
-      </button>
-      <div class="ai-feedback-box" id="ai-fb-ex6">
-        <div class="ai-fb-header">
-          <span class="ai-icon">🤖</span>
-          <span class="ai-title">AI Writing Feedback</span>
-        </div>
-        <div class="ai-fb-body" id="ai-fb-body-ex6">Loading…</div>
-      </div>
-      </div>
-    </div>
+    
     <div class="tab-content" id="ex6-gloss">
       <div class="glossary-grid">
         <div class="gloss-card"><div class="gloss-word">Cruise ship</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Gemi turu, kruvaziyer</div><div class="gloss-en">a large ship for leisure travel</div></div>
@@ -1506,7 +1298,6 @@ footer span { color: var(--accent); }
       <button class="tab-btn" onclick="openTab(this,'ex7-mcq')">🔵 Multiple Choice</button>
       <button class="tab-btn" onclick="openTab(this,'ex7-fill')">✏️ Fill in the Blanks</button>
       <button class="tab-btn" onclick="openTab(this,'ex7-vocab')">📚 Vocabulary</button>
-      <button class="tab-btn" onclick="openTab(this,'ex7-write')">🖊️ Writing</button>
       <button class="tab-btn" onclick="openTab(this,'ex7-gloss')">📖 Glossary</button>
     </div>
     <div class="tab-content active" id="ex7-text">
@@ -1558,24 +1349,7 @@ footer span { color: var(--accent); }
         <div class="score-display" id="score-ex7-vocab"></div>
       </div>
     </div>
-    <div class="tab-content" id="ex7-write">
-      <div class="questions-section"><h3><span class="q-icon">🖊️</span> Writing Task</h3>
-        <div class="writing-prompt"><strong>Write a short paragraph (60–100 words):</strong><br/><br/>Carl Sagan famously said we are "made of star stuff." After reading this article about how stars form and eventually explode, spreading their elements across the universe, do you find this idea inspiring or surprising? Why? Describe what this idea means to you and how it changes the way you think about human beings and the universe.</div>
-        <textarea class="writing-area" id="write-ex7" placeholder="Write your paragraph here..." oninput="countWords(this,'wc-ex7')"></textarea>
-        <div class="word-count" id="wc-ex7">Words: 0</div>
-      <button class="writing-check-btn" id="check-btn-ex7" onclick="checkWriting('ex7')">
-        <div class="spinner"></div>
-        <span class="btn-text">✦ AI Feedback — Check My Writing</span>
-      </button>
-      <div class="ai-feedback-box" id="ai-fb-ex7">
-        <div class="ai-fb-header">
-          <span class="ai-icon">🤖</span>
-          <span class="ai-title">AI Writing Feedback</span>
-        </div>
-        <div class="ai-fb-body" id="ai-fb-body-ex7">Loading…</div>
-      </div>
-      </div>
-    </div>
+    
     <div class="tab-content" id="ex7-gloss">
       <div class="glossary-grid">
         <div class="gloss-card"><div class="gloss-word">Element</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Element, kimyasal madde</div><div class="gloss-en">a basic chemical substance</div></div>
@@ -1606,7 +1380,6 @@ footer span { color: var(--accent); }
       <button class="tab-btn" onclick="openTab(this,'ex8-mcq')">🔵 Multiple Choice</button>
       <button class="tab-btn" onclick="openTab(this,'ex8-fill')">✏️ Fill in the Blanks</button>
       <button class="tab-btn" onclick="openTab(this,'ex8-vocab')">📚 Vocabulary</button>
-      <button class="tab-btn" onclick="openTab(this,'ex8-write')">🖊️ Writing</button>
       <button class="tab-btn" onclick="openTab(this,'ex8-gloss')">📖 Glossary</button>
     </div>
     <div class="tab-content active" id="ex8-text">
@@ -1658,24 +1431,7 @@ footer span { color: var(--accent); }
         <div class="score-display" id="score-ex8-vocab"></div>
       </div>
     </div>
-    <div class="tab-content" id="ex8-write">
-      <div class="questions-section"><h3><span class="q-icon">🖊️</span> Writing Task</h3>
-        <div class="writing-prompt"><strong>Write a short paragraph (60–100 words):</strong><br/><br/>The article describes a military conflict between the US and Israel against Iran. International conflicts can have very serious consequences for people in the region and around the world. Based on the events described in this text, write about what you think the international community should do when a conflict like this begins. Use facts from the article to support your ideas.</div>
-        <textarea class="writing-area" id="write-ex8" placeholder="Write your paragraph here..." oninput="countWords(this,'wc-ex8')"></textarea>
-        <div class="word-count" id="wc-ex8">Words: 0</div>
-      <button class="writing-check-btn" id="check-btn-ex8" onclick="checkWriting('ex8')">
-        <div class="spinner"></div>
-        <span class="btn-text">✦ AI Feedback — Check My Writing</span>
-      </button>
-      <div class="ai-feedback-box" id="ai-fb-ex8">
-        <div class="ai-fb-header">
-          <span class="ai-icon">🤖</span>
-          <span class="ai-title">AI Writing Feedback</span>
-        </div>
-        <div class="ai-fb-body" id="ai-fb-body-ex8">Loading…</div>
-      </div>
-      </div>
-    </div>
+    
     <div class="tab-content" id="ex8-gloss">
       <div class="glossary-grid">
         <div class="gloss-card"><div class="gloss-word">State of emergency</div><div class="gloss-pos">noun phrase</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Olağanüstü hal</div><div class="gloss-en">special powers due to danger</div></div>
@@ -1706,7 +1462,6 @@ footer span { color: var(--accent); }
       <button class="tab-btn" onclick="openTab(this,'ex9-mcq')">🔵 Multiple Choice</button>
       <button class="tab-btn" onclick="openTab(this,'ex9-fill')">✏️ Fill in the Blanks</button>
       <button class="tab-btn" onclick="openTab(this,'ex9-vocab')">📚 Vocabulary</button>
-      <button class="tab-btn" onclick="openTab(this,'ex9-write')">🖊️ Writing</button>
       <button class="tab-btn" onclick="openTab(this,'ex9-gloss')">📖 Glossary</button>
     </div>
     <div class="tab-content active" id="ex9-text">
@@ -1758,24 +1513,7 @@ footer span { color: var(--accent); }
         <div class="score-display" id="score-ex9-vocab"></div>
       </div>
     </div>
-    <div class="tab-content" id="ex9-write">
-      <div class="questions-section"><h3><span class="q-icon">🖊️</span> Writing Task</h3>
-        <div class="writing-prompt"><strong>Write a short paragraph (60–100 words):</strong><br/><br/>Punch the baby monkey needs comfort after being separated from his mother. The zookeepers found a creative solution — giving him a stuffed toy that looks like a monkey. Think about a time when you or someone you know found comfort in an unusual or creative way. How does this story of Punch make you feel? Write your personal response using details from the article.</div>
-        <textarea class="writing-area" id="write-ex9" placeholder="Write your paragraph here..." oninput="countWords(this,'wc-ex9')"></textarea>
-        <div class="word-count" id="wc-ex9">Words: 0</div>
-      <button class="writing-check-btn" id="check-btn-ex9" onclick="checkWriting('ex9')">
-        <div class="spinner"></div>
-        <span class="btn-text">✦ AI Feedback — Check My Writing</span>
-      </button>
-      <div class="ai-feedback-box" id="ai-fb-ex9">
-        <div class="ai-fb-header">
-          <span class="ai-icon">🤖</span>
-          <span class="ai-title">AI Writing Feedback</span>
-        </div>
-        <div class="ai-fb-body" id="ai-fb-body-ex9">Loading…</div>
-      </div>
-      </div>
-    </div>
+    
     <div class="tab-content" id="ex9-gloss">
       <div class="glossary-grid">
         <div class="gloss-card"><div class="gloss-word">Stuffed toy</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Peluş oyuncak</div><div class="gloss-en">a soft toy filled with stuffing</div></div>
@@ -1806,7 +1544,6 @@ footer span { color: var(--accent); }
       <button class="tab-btn" onclick="openTab(this,'ex10-mcq')">🔵 Multiple Choice</button>
       <button class="tab-btn" onclick="openTab(this,'ex10-fill')">✏️ Fill in the Blanks</button>
       <button class="tab-btn" onclick="openTab(this,'ex10-vocab')">📚 Vocabulary</button>
-      <button class="tab-btn" onclick="openTab(this,'ex10-write')">🖊️ Writing</button>
       <button class="tab-btn" onclick="openTab(this,'ex10-gloss')">📖 Glossary</button>
     </div>
     <div class="tab-content active" id="ex10-text">
@@ -1858,24 +1595,7 @@ footer span { color: var(--accent); }
         <div class="score-display" id="score-ex10-vocab"></div>
       </div>
     </div>
-    <div class="tab-content" id="ex10-write">
-      <div class="questions-section"><h3><span class="q-icon">🖊️</span> Writing Task</h3>
-        <div class="writing-prompt"><strong>Write a short paragraph (60–100 words):</strong><br/><br/>Venezuela has one of the world's largest oil reserves, but its oil is difficult to use and causes high emissions. Some people think countries should stop using fossil fuels, while others believe they are necessary for economic development. Based on the article, do you think Venezuela should try to develop its oil industry or focus on finding cleaner energy sources? Explain your view with reasons.</div>
-        <textarea class="writing-area" id="write-ex10" placeholder="Write your paragraph here..." oninput="countWords(this,'wc-ex10')"></textarea>
-        <div class="word-count" id="wc-ex10">Words: 0</div>
-      <button class="writing-check-btn" id="check-btn-ex10" onclick="checkWriting('ex10')">
-        <div class="spinner"></div>
-        <span class="btn-text">✦ AI Feedback — Check My Writing</span>
-      </button>
-      <div class="ai-feedback-box" id="ai-fb-ex10">
-        <div class="ai-fb-header">
-          <span class="ai-icon">🤖</span>
-          <span class="ai-title">AI Writing Feedback</span>
-        </div>
-        <div class="ai-fb-body" id="ai-fb-body-ex10">Loading…</div>
-      </div>
-      </div>
-    </div>
+    
     <div class="tab-content" id="ex10-gloss">
       <div class="glossary-grid">
         <div class="gloss-card"><div class="gloss-word">Reserve</div><div class="gloss-pos">noun</div><div class="gloss-meaning"><span class="tr-flag">🇹🇷</span> Rezerv, kaynak</div><div class="gloss-en">a supply kept for future use</div></div>
@@ -1904,11 +1624,15 @@ function toggleEx(id) {
 
 /* ── OPEN TAB ── */
 function openTab(btn, contentId) {
-  const body = btn.closest('.exercise-body');
-  body.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  body.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  // Walk up to the .exercise container (the real card wrapper)
+  const card = btn.closest('.exercise');
+  if (!card) return;
+  // Deactivate all tab buttons and panes ONLY within this card
+  card.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  card.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
   btn.classList.add('active');
-  document.getElementById(contentId).classList.add('active');
+  const target = document.getElementById(contentId);
+  if (target) target.classList.add('active');
 }
 
 /* ── CHECK MCQ ── */
@@ -2021,82 +1745,6 @@ function countWords(el, counterId) {
     counter.textContent = `Words: ${count}`;
     counter.style.color = count >= 60 && count <= 100 ? '#4caf50' : count > 100 ? '#e53935' : 'var(--muted)';
   }
-}
-</script>
-
-<script>
-// ── AI WRITING CHECKER ──────────────────────────────────────────────
-async function checkWriting(exId) {
-  const textarea = document.getElementById('write-' + exId);
-  const btn = document.getElementById('check-btn-' + exId);
-  const fbBox = document.getElementById('ai-fb-' + exId);
-  const fbBody = document.getElementById('ai-fb-body-' + exId);
-
-  const text = textarea.value.trim();
-  if (!text || text.split(/\s+/).length < 10) {
-    fbBox.classList.add('visible');
-    fbBody.innerHTML = '<p style="color:#ff6b6b;">⚠ Please write at least 10 words before checking.</p>';
-    return;
-  }
-
-  const promptEl = textarea.closest('.tab-content') 
-    ? textarea.closest('.tab-content').querySelector('.writing-prompt')
-    : null;
-  const writingPrompt = promptEl ? promptEl.innerText.trim() : 'Write a short paragraph about the topic.';
-
-  btn.classList.add('loading');
-  btn.disabled = true;
-  fbBox.classList.add('visible');
-  fbBody.innerHTML = '<p style="opacity:0.6;font-style:italic;">🤖 Analysing your writing…</p>';
-
-  const systemPrompt = `You are a friendly English writing tutor for B1-B2 level university preparatory students. Check the student paragraph for grammar, vocabulary, coherence, and task completion. Reply ONLY with HTML (no markdown, no code fences). Use exactly this structure:
-
-<div class="fb-section"><div class="fb-section-title">📝 Corrected Version</div><div class="corrected-text">WRITE THE FULL CORRECTED PARAGRAPH HERE. For each error, show: <span class="error-mark">wrong</span> <span class="correction">→ correct</span> inline.</div></div>
-<div class="fb-section"><div class="fb-section-title">🔍 Errors Found</div><ul>LIST EACH ERROR as <li><strong>Type:</strong> explanation</li></ul></div>
-<div class="fb-section"><div class="fb-section-title">💡 Writing Tips</div><ul>2-3 tips as <li> items</ul></div>
-<div class="fb-section"><div class="fb-section-title">⭐ Overall</div><p>1-2 encouraging sentences.</p><div class="score-pill">Score: X/10</div></div>
-
-If no errors, celebrate and give tips for improvement anyway.`;
-
-  try {
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-iab': 'true'
-      },
-      body: JSON.stringify({
-        model: 'claude-haiku-4-5-20251001',
-        max_tokens: 1024,
-        system: systemPrompt,
-        messages: [{
-          role: 'user',
-          content: 'Writing task: ' + writingPrompt + '\n\nStudent wrote:\n' + text
-        }]
-      })
-    });
-
-    if (!resp.ok) {
-      const errData = await resp.json().catch(() => ({}));
-      throw new Error((errData.error && errData.error.message) || 'HTTP ' + resp.status);
-    }
-
-    const data = await resp.json();
-    const content = data.content && data.content[0] && data.content[0].text;
-    if (content) {
-      // Strip any accidental code fences
-      fbBody.innerHTML = content.replace(/```html?\n?/g,'').replace(/```/g,'').trim();
-    } else {
-      fbBody.innerHTML = '<p style="color:#ff6b6b;">⚠ No response received. Please try again.</p>';
-    }
-  } catch (err) {
-    fbBody.innerHTML = '<p style="color:#ff6b6b;">⚠ Error: ' + err.message + '</p><p style="font-size:12px;opacity:0.7;margin-top:6px;">Note: This feature requires an internet connection and works when the page is served via Claude.ai or a web server.</p>';
-  }
-
-  btn.classList.remove('loading');
-  btn.disabled = false;
-  fbBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 </script>
 
